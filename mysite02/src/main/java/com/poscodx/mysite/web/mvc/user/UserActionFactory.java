@@ -18,6 +18,8 @@ public class UserActionFactory implements com.poscodx.web.mvc.ActionFactory {
 			action = new LoginFormAction();
 		} else if("login".equals(actionName)) {
 			action = new LoginAction();
+		} else if("logout".equals(actionName)) {
+			action = new LoginoutAction();
 		} else {
 			action = new MainAction();
 		}
