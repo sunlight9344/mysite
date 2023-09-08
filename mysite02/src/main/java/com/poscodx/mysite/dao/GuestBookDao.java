@@ -80,6 +80,7 @@ public class GuestBookDao {
 			pstmt.setString(2, vo.getPassword());
 			pstmt.setString(3, vo.getContents());
 			pstmt.setString(4, vo.getReg_date());
+			pstmt.setString(5, vo.getReg_date());
 			
 			pstmt.executeQuery();
 			
