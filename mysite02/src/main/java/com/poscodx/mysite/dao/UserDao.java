@@ -93,6 +93,134 @@ public class UserDao {
 			}
 		}
 
+	public UserVo getAllUserInfo(Long no2) {
+		UserVo userVo = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs =  null;
+		try {
+			conn = getConnection();
+			
+			String sql = "select no, name, email, gender "
+					+ " from user "
+					+ " where no=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setLong(1, no2);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				Long no = rs.getLong(1);
+				String name = rs.getString(2);
+				String email = rs.getString(3);
+				String gender = rs.getString(4);
+				
+				userVo = new UserVo();
+				userVo.setNo(no);
+				userVo.setName(name);
+				userVo.setEmail(email);
+				userVo.setGender(gender);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if(rs != null) {
+					rs.close();
+				}
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return userVo;
+	}
+
+	public void updateWithOutPassword(Long no,String name, String email, String gender) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = getConnection();
+			
+			String sql = "update user"
+					+ " set name = ?,"
+					+ " email = ?,"
+					+ " gender = ?"
+					+ " where no = ?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			pstmt.setString(3, gender);
+			pstmt.setLong(4, no);
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void updateWithPassword(Long no, String name, String email, String gender, String password) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = getConnection();
+			
+			String sql = "update user"
+					+ " set name = ?,"
+					+ " email = ?,"
+					+ " gender = ?,"
+					+ " password = password(?)"
+					+ " where no = ?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			pstmt.setString(3, gender);
+			pstmt.setString(4, password);
+			pstmt.setLong(5, no);
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	private Connection getConnection() throws SQLException {
 		
 		Connection conn = null;
@@ -106,6 +234,8 @@ public class UserDao {
 		}
 		return conn;
 	}
+
+
 
 
 }
