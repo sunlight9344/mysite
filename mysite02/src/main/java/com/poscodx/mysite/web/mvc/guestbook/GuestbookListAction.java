@@ -12,7 +12,7 @@ import com.poscodx.mysite.dao.GuestBookDao;
 import com.poscodx.mysite.vo.GuestBookVo;
 import com.poscodx.web.mvc.Action;
 
-public class guestBookListAction implements Action {
+public class GuestbookListAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

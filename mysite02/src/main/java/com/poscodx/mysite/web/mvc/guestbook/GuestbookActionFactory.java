@@ -9,11 +9,11 @@ public class GuestbookActionFactory implements com.poscodx.web.mvc.ActionFactory
 		if("insert".equals(actionName)) {
 			action = new InsertAction();
 		} else if("deleteform".equals(actionName)) {
-			action = new deleteFormAction();
+			action = new DeleteFormAction();
 		} else if("delete".equals(actionName)) {
-			action = new deleteAction();
+			action = new DeleteAction();
 		} else {
-			action = new guestBookListAction();
+			action = new GuestbookListAction();
 		}
 		
 		return action;

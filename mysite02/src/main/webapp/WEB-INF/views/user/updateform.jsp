@@ -1,9 +1,10 @@
 <%@page import="com.poscodx.mysite.vo.UserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% 	Long no = (Long)request.getAttribute("no"); 
+<% 	
+	Long no = (Long)request.getAttribute("no"); 
 	String email = (String)request.getAttribute("email"); 
 	String name = (String)request.getAttribute("name"); 
-	String gender = (String)request.getAttribute("gender"); 
+	String gender = (String)request.getAttribute("gender");
 %>
 <!DOCTYPE html>
 <html>
