@@ -1,10 +1,7 @@
 <%@page import="com.poscodx.mysite.vo.UserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% 	
-	Long no = (Long)request.getAttribute("no"); 
-	String email = (String)request.getAttribute("email"); 
-	String name = (String)request.getAttribute("name"); 
-	String gender = (String)request.getAttribute("gender");
+	UserVo userVo = (UserVo)request.getAttribute("userVo");
 %>
 <!DOCTYPE html>
 <html>
@@ -21,13 +18,13 @@
 
 				<form id="join-form" name="joinForm" method="post" action="<%=request.getContextPath() %>/user">
 					<input type="hidden" name="a" value="update">
-					<input type="hidden" name="no" value="<%=no%>">
+					<input type="hidden" name="no" value="<%=userVo.getNo()%>">
 					<label class="block-label" for="name">이름</label>
-					<input id="name" name="name" type="text" value="<%=name%>">
+					<input id="name" name="name" type="text" value="<%=userVo.getName()%>">
 					
 					<label class="block-label" for="email">이메일</label>
-					<input id="email" name="email" type="hidden" value="<%=email%>">
-					<h4><%=email %></h4>
+					<input id="email" name="email" type="hidden" value="<%=userVo.getEmail()%>">
+					<h4><%=userVo.getEmail() %></h4>
 					
 					<label class="block-label">패스워드</label>
 					<input name="password" type="password" value="">
@@ -35,7 +32,7 @@
 					<fieldset>
 						<legend>성별</legend>
 						<%
-							if("male".equals(gender)) {
+							if("male".equals(userVo.getGender())) {
 						%>
 						<label>여</label> <input type="radio" name="gender" value="female">
 						<label>남</label> <input type="radio" name="gender" value="male" checked="checked">

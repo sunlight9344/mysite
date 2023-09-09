@@ -27,11 +27,7 @@ public class UpdateformAction implements Action {
 		Long no = authUser.getNo();
 		
 		UserVo userVo = new UserDao().getAllUserInfo(no);
-		
-		request.setAttribute("no", userVo.getNo());
-		request.setAttribute("name", userVo.getName());
-		request.setAttribute("email", userVo.getEmail());
-		request.setAttribute("gender", userVo.getGender());
+		request.setAttribute("userVo", userVo);
 		////========================////////======//=====================////=//=======//////////////========////
 		WebUtil.forward("user/updateform", request, response);
 	}
