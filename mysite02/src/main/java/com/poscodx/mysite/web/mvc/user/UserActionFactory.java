@@ -1,6 +1,6 @@
 package com.poscodx.mysite.web.mvc.user;
 
-import com.poscodx.mysite.web.mbc.main.MainAction;
+import com.poscodx.mysite.web.mvc.main.MainAction;
 import com.poscodx.web.mvc.Action;
 
 public class UserActionFactory implements com.poscodx.web.mvc.ActionFactory {
