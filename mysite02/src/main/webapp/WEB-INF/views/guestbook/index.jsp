@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% request.setAttribute("newline", "\n"); %>
-
 <html>
 <head>
 <title>mysite</title>
@@ -36,11 +35,12 @@
 					</table>
 				</form>
 				<ul>
-					<c:forEach items="${list }" var="vo">
+					<c:forEach items="${list }" var="vo" varStatus="status">
+					<c:set var="cnt" value="${fn:length(list) }" />
 						<li>
 							<table>
 								<tr>
-									<td>[${vo.no}]
+									<td>[${cnt - status.index }]
 									</td>
 									<td>${vo.name }</td>
 									<td>${vo.reg_date }</td>
