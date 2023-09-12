@@ -12,7 +12,7 @@ import com.poscodx.mysite.vo.BoardVo;
 import com.poscodx.mysite.vo.UserVo;
 import com.poscodx.web.mvc.Action;
 
-public class BoardWriteAction implements Action {
+public class WriteAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

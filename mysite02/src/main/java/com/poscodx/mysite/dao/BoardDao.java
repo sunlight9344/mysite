@@ -243,6 +243,76 @@ public class BoardDao {
 			pstmt.setInt(1, g_no);
 			pstmt.setInt(2, o_no);
 			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if(rs != null) {
+					rs.close();
+				}
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void DeleteByNo(int x) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs =  null;
+		try {
+			conn = getConnection();
+			
+			String sql = "delete from board where no = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, x);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if(rs != null) {
+					rs.close();
+				}
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void ModifyByNo(int no, String title, String contents) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs =  null;
+		try {
+			conn = getConnection();
+			
+			String sql = "update board"
+					+ " set title = ?, contents = ?, reg_date = current_time()"
+					+ " where no = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, contents);
+			pstmt.setInt(3, no);
+			pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		} finally {

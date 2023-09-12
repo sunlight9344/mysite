@@ -8,15 +8,19 @@ public class BoardActionFactory implements ActionFactory {
 	public Action getAction(String actionName) {
 		Action action = null;
 		if("write".equals(actionName)) {
-			action = new BoardWriteAction();
+			action = new WriteAction();
 		} else if("writeform".equals(actionName)) {
-			action = new BoardWriteFormAction();
+			action = new WriteFormAction();
 		} else if("modify".equals(actionName)) {
-			action = new BoardModifyAction();
+			action = new ModifyAction();
+		} else if("modifyform".equals(actionName)) {
+			action = new ModifyFormAction();
 		} else if("view".equals(actionName)) {
-			action = new BoardViewAction();
+			action = new ViewAction();
+		} else if("delete".equals(actionName)) {
+			action = new DeleteAction();
 		} else {
-			action = new BoardListAction();
+			action = new ListAction();
 		}
 		
 		return action;
