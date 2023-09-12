@@ -28,9 +28,7 @@ public class ModifyFormAction implements Action {
 		
 		BoardVo vo = new BoardDao().getBoardInfoByNo(no);
 		
-		request.setAttribute("title", vo.getTitle());
-		request.setAttribute("contents", vo.getContents());
-		request.setAttribute("no", no);
+		request.setAttribute("vo", vo);
 		
 		WebUtil.forward("/board/modify", request, response);
 	}
