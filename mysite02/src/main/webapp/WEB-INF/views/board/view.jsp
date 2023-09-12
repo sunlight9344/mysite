@@ -34,7 +34,19 @@
 				</table>
 				<div class="bottom">
 					<a href="${pageContext.request.contextPath }/board">글목록</a>
-					<a href="${pageContext.request.contextPath }/board?a=modifyform&no=${vo.no }">글수정</a>
+					
+					<c:choose>
+						<c:when test="${authUser.no eq vo.user_no }">
+							<a href="${pageContext.request.contextPath }/board?a=modifyform&no=${vo.no }">수정</a>
+						</c:when>
+						<c:when test="${empty authUser }">
+							<a href="${pageContext.request.contextPath }/user?a=loginform" id="new-book">수정(로그인 필요)</a>
+						</c:when>
+						<c:otherwise>
+							<a href="">수정불가</a>
+						</c:otherwise>
+					</c:choose>
+					
 					<c:choose>
 						<c:when test="${empty authUser }">
 							<a href="${pageContext.request.contextPath }/user?a=loginform" id="new-book">글쓰기(로그인 필요)</a>
