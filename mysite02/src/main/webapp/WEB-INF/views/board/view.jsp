@@ -39,9 +39,14 @@
 						<c:when test="${authUser.no eq vo.user_no }">
 							<a href="${pageContext.request.contextPath }/board?a=modifyform&no=${vo.no }&curPage=${curPage }">수정</a>
 						</c:when>
-						<c:when test="${empty authUser }">
-							<a href="${pageContext.request.contextPath }/user?a=loginform" id="new-book">수정(로그인 필요)</a>
-						</c:when>
+						<%--
+							<c:when test="${empty authUser }">
+								<a href="${pageContext.request.contextPath }/user?a=loginform" id="new-book">수정(로그인 필요)</a>
+							</c:when>
+							<c:otherwise>
+								<a href="">수정불가</a>
+							</c:otherwise>
+						 --%>
 					</c:choose>
 					
 					<c:choose>
