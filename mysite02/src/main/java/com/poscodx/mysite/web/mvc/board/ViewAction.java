@@ -17,9 +17,12 @@ public class ViewAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
 		int no = Integer.parseInt(request.getParameter("no"));
+		int curPage = Integer.parseInt(request.getParameter("curPage"));
+
 		BoardVo vo = new BoardDao().getBoardInfoByNo(no);
-		
 		new BoardDao().UpdateHit(no);
+		
+		request.setAttribute("curPage", curPage);
 		request.setAttribute("vo", vo);
 		
 		WebUtil.forward("/board/view", request, response);

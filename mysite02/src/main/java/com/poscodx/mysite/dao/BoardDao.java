@@ -11,7 +11,9 @@ import java.util.List;
 import com.poscodx.mysite.vo.BoardVo;
 
 public class BoardDao {
-	public List<BoardVo> findAll() {
+	
+	
+	public List<BoardVo> findAll(int start, int listPerPage) {
 
 		List<BoardVo> list = new ArrayList<>();
 
@@ -25,9 +27,10 @@ public class BoardDao {
 			String sql = "select a.no, a.title, a.contents, a.hit, a.reg_date, a.g_no, a.o_no, a.depth, a.user_no, b.name"
 					+ " from board a, user b "
 					+ " where a.user_no = b.no"
-					+ " order by g_no DESC, o_no ASC";
+					+ " order by g_no DESC, o_no ASC limit ?, ?";
 			pstmt = conn.prepareStatement(sql);
-
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, listPerPage);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -352,6 +355,45 @@ public class BoardDao {
 		}
 	}
 	
+	public int findCount() {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs =  null;
+		try {
+			conn = getConnection();
+			
+			String sql = "select count(*)"
+					+ " from board";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if(rs != null) {
+					rs.close();
+				}
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
 	private Connection getConnection() throws SQLException {
 
 		Connection conn = null;
@@ -365,4 +407,6 @@ public class BoardDao {
 		}
 		return conn;
 	}
+
+
 }
