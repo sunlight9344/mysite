@@ -15,8 +15,8 @@ public class DeleteAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
 		int no = Integer.parseInt(request.getParameter("no"));
-		
+		int curPage = Integer.parseInt(request.getParameter("curPage"));
 		new BoardDao().DeleteByNo(no);
-		response.sendRedirect("/mysite02/board");
+		response.sendRedirect("/mysite02/board?curPage="+curPage);
 	}
 }
