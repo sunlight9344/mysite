@@ -27,7 +27,7 @@
 						<td class="label">내용</td>
 						<td>
 							<div class="view-content">
-								${vo.contents }
+								${fn:replace(vo.contents, newline, "<br>") }
 							</div>
 						</td>
 					</tr>
@@ -51,10 +51,10 @@
 					
 					<c:choose>
 						<c:when test="${empty authUser }">
-							<a href="${pageContext.request.contextPath }/user?a=loginform" id="new-book">글쓰기(로그인 필요)</a>
+							<a href="${pageContext.request.contextPath }/user?a=loginform" id="new-book">답글쓰기(로그인 필요)</a>
 						</c:when>
 						<c:otherwise>
-							<a href="${pageContext.request.contextPath }/board?a=writeform&no=${vo.no }" id="new-book">글쓰기</a>
+							<a href="${pageContext.request.contextPath }/board?a=writeform&no=${vo.no }" id="new-book">답글쓰기</a>
 						</c:otherwise>
 					</c:choose>
 				</div>
