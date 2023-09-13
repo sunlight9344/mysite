@@ -54,7 +54,7 @@
 				<div class="pager">
 				
 					<ul>
-						<li><a href="${pageContext.request.contextPath }/board?curPage=${curPage-1 }">◀</a></li>
+						<li><a href="${pageContext.request.contextPath }/board?curPage=${(curPage-1) < 1 ? 1 : curPage-1 }">◀</a></li>
 						<c:forEach var="i" begin="1" end="${pageLength }">
 						
 							<c:choose>
@@ -68,7 +68,7 @@
 
 							
 						</c:forEach>
-						<li><a href="${pageContext.request.contextPath }/board?curPage=${curPage+1 }">▶</a></li>
+						<li><a href="${pageContext.request.contextPath }/board?curPage=${(curPage+1) > pageLength ? pageLength : curPage+1 }">▶</a></li>
 					</ul>
 				</div>
 				<!-- pager 추가 -->

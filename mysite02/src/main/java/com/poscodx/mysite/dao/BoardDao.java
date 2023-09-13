@@ -13,7 +13,7 @@ import com.poscodx.mysite.vo.BoardVo;
 public class BoardDao {
 	
 	
-	public List<BoardVo> findAll(int start, int listPerPage) {
+	public List<BoardVo> findAll(int curPage, int listPerPage) {
 
 		List<BoardVo> list = new ArrayList<>();
 
@@ -29,7 +29,7 @@ public class BoardDao {
 					+ " where a.user_no = b.no"
 					+ " order by g_no DESC, o_no ASC limit ?, ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, start);
+			pstmt.setInt(1, (curPage-1)*listPerPage);
 			pstmt.setInt(2, listPerPage);
 			rs = pstmt.executeQuery();
 
@@ -355,7 +355,7 @@ public class BoardDao {
 		}
 	}
 	
-	public int findCount() {
+	public int findAllCount() {
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
