@@ -17,8 +17,7 @@
 		<div id="content">
 			<div id="board">
 				<form id="search_form" action="" method="post">
-					<input type="text" id="kwd" name="kwd" value=""> <input
-						type="submit" value="찾기">
+					<input type="text" id="kwd" name="kwd" value=""> <input type="submit" value="찾기">
 				</form>
 				<table class="tbl-ex">
 					<tr>
@@ -54,7 +53,10 @@
 				<div class="pager">
 				
 					<ul>
-						<li><a href="${pageContext.request.contextPath }/board?curPage=${(curPage-1) < 1 ? 1 : curPage-1 }">◀</a></li>
+						<c:if test="${curPage ge 2}">
+							<li><a href="${pageContext.request.contextPath }/board?curPage=${(curPage-1) < 1 ? 1 : curPage-1 }">◀</a></li>
+						</c:if>
+						
 						<c:forEach var="i" begin="1" end="${pageLength }">
 						
 							<c:choose>
@@ -68,7 +70,11 @@
 
 							
 						</c:forEach>
-						<li><a href="${pageContext.request.contextPath }/board?curPage=${(curPage+1) > pageLength ? pageLength : curPage+1 }">▶</a></li>
+						
+						<c:if test="${curPage lt pageLength}">
+							<li><a href="${pageContext.request.contextPath }/board?curPage=${(curPage+1) > pageLength ? pageLength : curPage+1 }">▶</a></li>
+						</c:if>
+						
 					</ul>
 				</div>
 				<!-- pager 추가 -->
