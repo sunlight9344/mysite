@@ -27,16 +27,10 @@ public class EncodingFilter extends HttpFilter implements Filter {
 		request.setCharacterEncoding(encoding);
 		
 		chain.doFilter(request, response);
-		
 	}
 	
 	public void destroy() {
 		
 	}
-
-	
-	
-
-	
 	
 }

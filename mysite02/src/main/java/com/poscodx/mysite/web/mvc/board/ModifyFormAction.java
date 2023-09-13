@@ -25,10 +25,12 @@ public class ModifyFormAction implements Action {
 		}
 		
 		int no = Integer.parseInt(request.getParameter("no"));
+		int curPage = Integer.parseInt(request.getParameter("curPage"));
 		
 		BoardVo vo = new BoardDao().getBoardInfoByNo(no);
 		
 		request.setAttribute("vo", vo);
+		request.setAttribute("curPage", curPage);
 		
 		WebUtil.forward("/board/modify", request, response);
 	}

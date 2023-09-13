@@ -17,10 +17,11 @@ public class ModifyAction implements Action {
 		String title = request.getParameter("title");
 		String contents = request.getParameter("content");
 		int no = Integer.parseInt(request.getParameter("no"));
+		int curPage = Integer.parseInt(request.getParameter("curPage"));
 		
 		new BoardDao().ModifyByNo(no, title, contents);
 		
-		response.sendRedirect(request.getContextPath()+ "/board?a=view&no="+no);
+		response.sendRedirect(request.getContextPath()+ "/board?a=view&no="+no+"&curPage="+curPage);
 	}
 
 }

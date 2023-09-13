@@ -17,6 +17,7 @@
 				<form class="board-form" method="post" action="${pageContext.request.contextPath }/board">
 					<input type="hidden" name="a" value="modify">
 					<input type='hidden' name="no" value="${vo.no }">
+					<input type='hidden' name="curPage" value="${curPage }">
 					
 					<table class="tbl-ex">
 						<tr>
@@ -34,7 +35,7 @@
 						</tr>
 					</table>
 					<div class="bottom">
-						<a href="${pageContext.request.contextPath }/board?a=view&no=${vo.no }">취소</a>
+						<a href="${pageContext.request.contextPath }/board?a=view&no=${vo.no }&curPage=${curPage }">취소</a>
 						<input type="submit" value="수정">
 					</div>
 				</form>				
