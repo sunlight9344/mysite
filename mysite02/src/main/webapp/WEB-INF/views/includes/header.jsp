@@ -7,7 +7,6 @@
 <div id="header">
 	<h1>MySite</h1>
 	<ul>
-	
 		<c:choose>
 			<c:when test="${empty authUser }">
 				<li><a href="${pageContext.request.contextPath }/user?a=loginform">로그인</a><li>
@@ -19,6 +18,5 @@
 				<li>${authUser.name }님 안녕하세요 ^^;</li>
 			</c:otherwise>
 		</c:choose>
-
 	</ul>
 </div>

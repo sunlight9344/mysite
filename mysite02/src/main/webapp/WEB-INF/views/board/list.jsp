@@ -52,14 +52,23 @@
 
 				<!-- pager 추가 -->
 				<div class="pager">
+				
 					<ul>
-						<li><a href="">◀</a></li>
-						<li><a href="">1</a></li>
-						<li class="selected">2</li>
-						<li><a href="">3</a></li>
-						<li>4</li>
-						<li>5</li>
-						<li><a href="">▶</a></li>
+						<li><a href="${pageContext.request.contextPath }/board?curPage=${curPage-1 }">◀</a></li>
+						<c:forEach var="i" begin="1" end="${pageLength }">
+						
+							<c:choose>
+								<c:when test="${curPage eq i }">
+									<li class="selected">${i }</li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="${pageContext.request.contextPath }/board?curPage=${i }">${i }</a></li>
+								</c:otherwise>
+							</c:choose>
+
+							
+						</c:forEach>
+						<li><a href="${pageContext.request.contextPath }/board?curPage=${curPage+1 }">▶</a></li>
 					</ul>
 				</div>
 				<!-- pager 추가 -->
