@@ -18,6 +18,7 @@ public class ListAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
 		int listPerPage = 5;
+		int showPageLength = 5;
 		int totalPageLength = new BoardDao().findAllCount()/listPerPage + 1;
 		String sCurPage = request.getParameter("curPage");
 		int curPage = 1;
@@ -31,11 +32,18 @@ public class ListAction implements Action {
 			curPage = 1;
 		}
 		
+		int begin = curPage - (curPage % (listPerPage+1)) + 1;
+		int end = (begin + showPageLength <= totalPageLength) ? begin + showPageLength : totalPageLength;
+		
 		List<BoardVo> list = new BoardDao().findAll(curPage, listPerPage);
 		
 		request.setAttribute("list", list);
 		request.setAttribute("pageLength", totalPageLength);
 		request.setAttribute("curPage", curPage);
+		request.setAttribute("listPerPage", listPerPage);
+		request.setAttribute("begin", begin);
+		request.setAttribute("end", end);
+		System.out.println(begin);
 		
 		WebUtil.forward("/board/list", request, response);
 	}

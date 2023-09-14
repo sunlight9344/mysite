@@ -30,7 +30,7 @@
 					</tr>
 					
 					<c:forEach items="${list }" var="vo" varStatus="status"> 
-					<c:set var="cnt" value="${fn:length(list) }" />
+					<c:set var="cnt" value="${fn:length(list) * (pageLength-curPage) }" />
 						<tr>
 							<td>[${cnt - status.index }]</td>
 							<td style="padding-left: ${(vo.depth-1)*30 }px">
@@ -57,7 +57,7 @@
 							<li><a href="${pageContext.request.contextPath }/board?curPage=${(curPage-1) < 1 ? 1 : curPage-1 }">◀</a></li>
 						</c:if>
 						
-						<c:forEach var="i" begin="1" end="${pageLength }">
+						<c:forEach var="i" begin="${begin }" end="${end-1 }">
 						
 							<c:choose>
 								<c:when test="${curPage eq i }">
@@ -67,7 +67,6 @@
 									<li><a href="${pageContext.request.contextPath }/board?curPage=${i }">${i }</a></li>
 								</c:otherwise>
 							</c:choose>
-
 							
 						</c:forEach>
 						
