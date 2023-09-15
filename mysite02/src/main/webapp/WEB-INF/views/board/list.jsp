@@ -16,8 +16,11 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
 			<div id="board">
-				<form id="search_form" action="" method="post">
-					<input type="text" id="kwd" name="kwd" value=""> <input type="submit" value="찾기">
+				<form id="search_form" action="${pageContext.request.contextPath }/board" method="post">
+					<input type="text" id="kwd" name="kwd" value="${kwd }"> 
+					<input type="hidden" id="a" name="a" value="find">
+					<input type="submit" value="찾기">
+					
 				</form>
 				<table class="tbl-ex">
 					<tr>
@@ -56,7 +59,7 @@
 				
 					<ul>
 						<c:if test="${curPage ge 2}">
-							<li><a href="${pageContext.request.contextPath }/board?curPage=${begin-1 < 1 ? 1 : begin-1 }">◀</a></li>
+							<li><a href="${pageContext.request.contextPath }/board?curPage=${begin-1 < 1 ? 1 : begin-1 }&kwd=${kwd }">◀</a></li>
 						</c:if>
 						
 						<c:forEach var="i" begin="${begin }" end="${end }">
@@ -66,14 +69,14 @@
 									<li class="selected">${i }</li>
 								</c:when>
 								<c:otherwise>
-									<li><a href="${pageContext.request.contextPath }/board?curPage=${i }">${i }</a></li>
+									<li><a href="${pageContext.request.contextPath }/board?curPage=${i }&kwd=${kwd }">${i }</a></li>
 								</c:otherwise>
 							</c:choose>
 							
 						</c:forEach>
 						
 						<c:if test="${curPage lt pageLength}">
-							<li><a href="${pageContext.request.contextPath }/board?curPage=${(end+1) > pageLength ? pageLength : end+1 }">▶</a></li>
+							<li><a href="${pageContext.request.contextPath }/board?curPage=${(end+1) > pageLength ? pageLength : end+1 }&kwd=${kwd }">▶</a></li>
 						</c:if>
 						
 					</ul>

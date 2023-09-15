@@ -13,7 +13,7 @@ import com.poscodx.mysite.vo.BoardVo;
 public class BoardDao {
 	
 	
-	public List<BoardVo> findAll(int curPage, int listPerPage) {
+	public List<BoardVo> findAll(int curPage, int listPerPage, String kwd) {
 
 		List<BoardVo> list = new ArrayList<>();
 
@@ -24,13 +24,14 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 
-			String sql = "select a.no, a.title, a.contents, a.hit, a.reg_date, a.g_no, a.o_no, a.depth, a.user_no, b.name"
+			String sql = "select a.no, a.title, a.contents, a.hit, a.reg_date, a.g_no, a.o_no, a.depth, a.user_no ,b.name"
 					+ " from board a, user b "
-					+ " where a.user_no = b.no"
+					+ " where a.user_no = b.no and a.title like ?"
 					+ " order by g_no DESC, o_no ASC limit ?, ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, (curPage-1)*listPerPage);
-			pstmt.setInt(2, listPerPage);
+			pstmt.setString(1, "%"+kwd+"%");
+			pstmt.setInt(2, (curPage-1)*listPerPage);
+			pstmt.setInt(3, listPerPage);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -355,7 +356,7 @@ public class BoardDao {
 		}
 	}
 	
-	public int findAllCount() {
+	public int findAllCount(String kwd) {
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -364,10 +365,12 @@ public class BoardDao {
 			conn = getConnection();
 			
 			String sql = "select count(*)"
-					+ " from board";
+					+ " from board a"
+					+ " where a.title"
+					+ " like ?";
 			
 			pstmt = conn.prepareStatement(sql);
-			
+			pstmt.setString(1, "%"+kwd+"%");
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -407,6 +410,5 @@ public class BoardDao {
 		}
 		return conn;
 	}
-
 
 }
