@@ -30,9 +30,9 @@
 					</tr>
 					
 					<c:forEach items="${list }" var="vo" varStatus="status"> 
-					<c:set var="cnt" value="${fn:length(list) * (pageLength-curPage) }" />
+					<c:set var="cnt" value="${allLength - (curPage-1)*listPerPage }" />
 						<tr>
-							<td>[${cnt - status.index + 1}]</td>
+							<td>[${cnt-status.index}]</td>
 							<td style="padding-left: ${(vo.depth-1)*30 }px">
 								<c:if test="${vo.depth >= 2 }">
 									<img src="${pageContext.request.contextPath }/assets/images/reply.png">

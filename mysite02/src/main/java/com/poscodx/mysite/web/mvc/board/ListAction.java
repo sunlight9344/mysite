@@ -19,7 +19,8 @@ public class ListAction implements Action {
 		
 		int listPerPage = 5;
 		int showPageLength = 5;
-		int totalPageLength = new BoardDao().findAllCount()/listPerPage + 1;
+		int allLength = new BoardDao().findAllCount();
+		int totalPageLength = allLength/listPerPage + 1;
 		String sCurPage = request.getParameter("curPage");
 		int curPage = 1;
 		if(sCurPage != null) {
@@ -43,7 +44,7 @@ public class ListAction implements Action {
 		request.setAttribute("listPerPage", listPerPage);
 		request.setAttribute("begin", begin);
 		request.setAttribute("end", end);
-		System.out.println(begin + " " + end);
+		request.setAttribute("allLength", allLength);
 		
 		WebUtil.forward("/board/list", request, response);
 	}
