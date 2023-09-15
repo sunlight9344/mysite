@@ -32,7 +32,7 @@
 					<c:forEach items="${list }" var="vo" varStatus="status"> 
 					<c:set var="cnt" value="${fn:length(list) * (pageLength-curPage) }" />
 						<tr>
-							<td>[${cnt - status.index }]</td>
+							<td>[${cnt - status.index + 1}]</td>
 							<td style="padding-left: ${(vo.depth-1)*30 }px">
 								<c:if test="${vo.depth >= 2 }">
 									<img src="${pageContext.request.contextPath }/assets/images/reply.png">
@@ -57,7 +57,7 @@
 							<li><a href="${pageContext.request.contextPath }/board?curPage=${(curPage-1) < 1 ? 1 : curPage-1 }">◀</a></li>
 						</c:if>
 						
-						<c:forEach var="i" begin="${begin }" end="${end-1 }">
+						<c:forEach var="i" begin="${begin }" end="${end }">
 						
 							<c:choose>
 								<c:when test="${curPage eq i }">

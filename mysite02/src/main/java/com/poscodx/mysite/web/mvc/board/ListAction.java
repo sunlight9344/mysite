@@ -32,8 +32,8 @@ public class ListAction implements Action {
 			curPage = 1;
 		}
 		
-		int begin = curPage - (curPage % (listPerPage+1)) + 1;
-		int end = (begin + showPageLength <= totalPageLength) ? begin + showPageLength : totalPageLength;
+		int begin = ((curPage-1) / listPerPage) * listPerPage + 1;
+		int end = (begin + showPageLength - 1 <= totalPageLength) ? begin + showPageLength - 1 : totalPageLength;
 		
 		List<BoardVo> list = new BoardDao().findAll(curPage, listPerPage);
 		
@@ -43,7 +43,7 @@ public class ListAction implements Action {
 		request.setAttribute("listPerPage", listPerPage);
 		request.setAttribute("begin", begin);
 		request.setAttribute("end", end);
-		System.out.println(begin);
+		System.out.println(begin + " " + end);
 		
 		WebUtil.forward("/board/list", request, response);
 	}
