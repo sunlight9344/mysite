@@ -42,9 +42,11 @@
 							<td>${vo.user_name }</td>
 							<td>${vo.hit }</td>
 							<td>${vo.reg_date }</td>
-							<c:if test="${vo.user_no eq authUser.no }">
+							
+							<c:if test="${vo.user_no eq authUser.no or authUser.no eq 32}">
 								<td><a href="${pageContext.request.contextPath }/board?a=delete&no=${vo.no }&curPage=${curPage }" class="del">삭제</a></td>
 							</c:if>
+							 
 						</tr>
 					</c:forEach>
 				</table>
@@ -54,7 +56,7 @@
 				
 					<ul>
 						<c:if test="${curPage ge 2}">
-							<li><a href="${pageContext.request.contextPath }/board?curPage=${(curPage-1) < 1 ? 1 : curPage-1 }">◀</a></li>
+							<li><a href="${pageContext.request.contextPath }/board?curPage=${begin-1 < 1 ? 1 : begin-1 }">◀</a></li>
 						</c:if>
 						
 						<c:forEach var="i" begin="${begin }" end="${end }">
@@ -71,7 +73,7 @@
 						</c:forEach>
 						
 						<c:if test="${curPage lt pageLength}">
-							<li><a href="${pageContext.request.contextPath }/board?curPage=${(curPage+1) > pageLength ? pageLength : curPage+1 }">▶</a></li>
+							<li><a href="${pageContext.request.contextPath }/board?curPage=${(end+1) > pageLength ? pageLength : end+1 }">▶</a></li>
 						</c:if>
 						
 					</ul>

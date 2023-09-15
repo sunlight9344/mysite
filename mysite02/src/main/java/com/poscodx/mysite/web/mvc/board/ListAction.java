@@ -45,6 +45,7 @@ public class ListAction implements Action {
 		request.setAttribute("begin", begin);
 		request.setAttribute("end", end);
 		request.setAttribute("allLength", allLength);
+		//System.out.println(begin + " " +end);
 		
 		WebUtil.forward("/board/list", request, response);
 	}
