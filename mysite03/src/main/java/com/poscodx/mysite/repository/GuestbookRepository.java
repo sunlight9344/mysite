@@ -1,70 +1,29 @@
 package com.poscodx.mysite.repository;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.poscodx.mysite.vo.GuestbookVo;
 @Repository
 public class GuestbookRepository {
+	@Autowired
+	private DataSource dataSource;
+
+	@Autowired
+	private SqlSession sqlSession;
 	
 	public List<GuestbookVo> findAll() {
-		
-		List<GuestbookVo> list = new ArrayList<>();
-		
-		Connection conn = null;
-		ResultSet rs = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			conn = getConnection();
-			
-			String sql = "select no, name, password, contents, reg_date from guestbook order by reg_date desc";
-			pstmt = conn.prepareStatement(sql);
-			
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				int no = rs.getInt(1);
-				String name = rs.getString(2);
-				String password = rs.getString(3);
-				String contents = rs.getString(4);
-				String reg_date = rs.getString(5);
-				
-				GuestbookVo vo = new GuestbookVo();
-				vo.setNo(no);
-				vo.setName(name);
-				vo.setPassword(password);
-				vo.setContents(contents);				
-				vo.setReg_date(reg_date);				
-				list.add(vo);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("error:" + e);
-		} finally {
-			try {
-				//7. 자원정리
-				if(rs != null) {
-					rs.close();
-				}
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(conn != null) {
-					conn.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return list;
+		return sqlSession.selectList("guestbook.findAll");
 	}
 
 	public void insert(GuestbookVo vo) {
@@ -73,7 +32,7 @@ public class GuestbookRepository {
 		PreparedStatement pstmt = null;
 		
 		try {
-			conn = getConnection();
+			conn = dataSource.getConnection();
 			
 			String sql = "insert into guestbook values(null, ?, ?, ?, now())";
 			pstmt = conn.prepareStatement(sql);
@@ -106,7 +65,7 @@ public class GuestbookRepository {
 		PreparedStatement pstmt = null;
 		
 		try {
-			conn = getConnection();
+			conn = dataSource.getConnection();
 			
 			String sql = "delete from guestbook where no=? and password=?";
 			pstmt = conn.prepareStatement(sql);
@@ -132,19 +91,4 @@ public class GuestbookRepository {
 			}
 		}
 	}
-	
-	private Connection getConnection() throws SQLException {
-		
-		Connection conn = null;
-		
-		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			String url = "jdbc:mariadb://192.168.0.180:3307/webdb?charset=utf8";
-			conn = DriverManager.getConnection(url, "webdb", "webdb");
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패:" + e);
-		}
-		return conn;
-	}
-	
 }

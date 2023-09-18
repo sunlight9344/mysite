@@ -24,13 +24,13 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String join(UserVo vo) {
-		userService.join(vo);
+	public String join(UserVo userVo) {
+		userService.join(userVo);
 		return "redirect:/user/joinsuccess";
 	}
 	
 	@RequestMapping(value="/joinsuccess", method=RequestMethod.GET)
-	public String joinsuccess(UserVo vo) {
+	public String joinsuccess(UserVo userVo) {
 		return "user/joinsuccess";
 	}
 	
@@ -68,13 +68,30 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.GET)
-	public String update(HttpSession session) {
+	public String update(HttpSession session, Model model) {
 		// Access Control(update page 접근제어)
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		if(authUser == null) {
 			return "redirect:/user/login";
 		}
 		
+		UserVo userVo = userService.getUser(authUser.getNo());
+		model.addAttribute("userVo",userVo);
 		return "user/update";
+	}
+	
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public String update(HttpSession session, UserVo userVo) {
+		// Access Control(update page 접근제어)
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		if(authUser == null) {
+			return "redirect:/user/login";
+		}
+		userVo.setNo(authUser.getNo());
+		userService.update(userVo);
+		
+		authUser.setName(userVo.getName());
+		
+		return "redirect:/user/update";
 	}
 }

@@ -96,7 +96,7 @@ public class UserRepository {
 			}
 		}
 
-	public UserVo getAllUserInfo(Long no2) {
+	public UserVo findByNo(Long x) {
 		UserVo userVo = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -110,7 +110,7 @@ public class UserRepository {
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setLong(1, no2);
+			pstmt.setLong(1, x);
 			
 			rs = pstmt.executeQuery();
 			
@@ -146,66 +146,38 @@ public class UserRepository {
 		}
 		return userVo;
 	}
-
-	public void updateWithOutPassword(Long no,String name, String email, String gender) {
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			conn = getConnection();
-			
-			String sql = "update user"
-					+ " set name = ?,"
-					+ " email = ?,"
-					+ " gender = ?"
-					+ " where no = ?";
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, name);
-			pstmt.setString(2, email);
-			pstmt.setString(3, gender);
-			pstmt.setLong(4, no);
-			
-			pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			System.out.println("error:" + e);
-		} finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(conn != null) {
-					conn.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
 	
-	public void updateWithPassword(Long no, String name, String email, String gender, String password) {
+	
+	public void update(UserVo userVo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
 		try {
 			conn = getConnection();
 			
-			String sql = "update user"
-					+ " set name = ?,"
-					+ " email = ?,"
-					+ " gender = ?,"
-					+ " password = password(?)"
-					+ " where no = ?";
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, name);
-			pstmt.setString(2, email);
-			pstmt.setString(3, gender);
-			pstmt.setString(4, password);
-			pstmt.setLong(5, no);
-			
+			if("".equals(userVo.getPassword())) {
+				String sql = "update user"
+						+ " set name = ?,"
+						+ " gender = ?"
+						+ " where no = ?";
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, userVo.getName());
+				pstmt.setString(2, userVo.getGender());
+				pstmt.setLong(3, userVo.getNo());
+			}else {
+				String sql = "update user"
+						+ " set name = ?,"
+						+ " gender = ?,"
+						+ " password = password(?)"
+						+ " where no = ?";
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, userVo.getName());
+				pstmt.setString(2, userVo.getGender());
+				pstmt.setString(3, userVo.getPassword());
+				pstmt.setLong(4,userVo.getNo());
+			}
 			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -237,5 +209,7 @@ public class UserRepository {
 		}
 		return conn;
 	}
+
+
 
 }

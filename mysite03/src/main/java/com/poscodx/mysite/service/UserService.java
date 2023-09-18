@@ -13,6 +13,12 @@ public class UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	public void erpProcess01(UserVo vo) {
+//		erpEmployee1Repository.insert(vo);
+//		erpJobRepository.insert(vo);
+//		erpSalaryRepository.insert(vo);
+	}
 
 	public void join(UserVo vo) {
 		userRepository.insert(vo);
@@ -22,5 +28,13 @@ public class UserService {
 
 	public UserVo getUser(String email, String password) {
 		return userRepository.findByEmailAndPassword(email, password);
+	}
+
+	public UserVo getUser(Long no) {
+		return userRepository.findByNo(no);
+	}
+	
+	public void update(UserVo userVo) {
+		userRepository.update(userVo);
 	}
 }
