@@ -1,5 +1,7 @@
 package com.poscodx.mysite.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poscodx.mysite.service.BoardService;
 import com.poscodx.mysite.vo.BoardVo;
+import com.poscodx.mysite.vo.UserVo;
 
 @Controller
 @RequestMapping("/board")
@@ -68,12 +71,27 @@ public class BoardController {
 	
 	@RequestMapping(value="/delete/{no}")
 	public String delete(
+			HttpSession session,
 			@PathVariable("no") int no,
 			@RequestParam(value="p", required=true, defaultValue="1") int curPage) {
+		
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		if(authUser == null) {
+			return "redirect:/user/login";
+		}
 		
 		boardService.deleteByNo(no);
 		
 		return "redirect:/board?p=" + curPage;
 	}
 	
+
+	/*
+	 * /board/write/10
+	 * 
+	 * /board/write
+	 * 
+	 * 
+	 * 
+	 */
 }

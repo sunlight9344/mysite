@@ -83,7 +83,7 @@
 				<div class="bottom">
 					<c:choose>
 						<c:when test="${empty authUser }">
-							<a href="${pageContext.request.contextPath }/user/loginform" id="new-book">글쓰기(로그인 필요)</a>
+							<a href="${pageContext.request.contextPath }/user/login" id="new-book">글쓰기(로그인 필요)</a>
 						</c:when>
 						<c:otherwise>
 							<a href="${pageContext.request.contextPath }/board/write" id="new-book">글쓰기</a>
