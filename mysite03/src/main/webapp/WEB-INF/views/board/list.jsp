@@ -17,7 +17,7 @@
 		<div id="content">
 			<div id="board">
 				<form id="search_form" action="${pageContext.request.contextPath }/board" method="post">
-					<input type="text" id="kwd" name="kwd" value="${kwd }"> 
+					<input type="text" id="kwd" name="kwd" value="${map.kwd }"> 
 					<input type="submit" value="찾기">
 				</form>
 				<table class="tbl-ex">
@@ -30,22 +30,22 @@
 						<th>&nbsp;</th>
 					</tr>
 					
-					<c:forEach items="${list }" var="vo" varStatus="status"> 
-					<c:set var="cnt" value="${allLength - (curPage-1)*listPerPage }" />
+					<c:forEach items="${map.list }" var="vo" varStatus="status"> 
+					<c:set var="cnt" value="${map.allCount- (map.curPage-1)*map.listPerPage }" />
 						<tr>
 							<td>[${cnt-status.index}]</td>
 							<td style="padding-left: ${(vo.depth-1)*30 }px">
 								<c:if test="${vo.depth >= 2 }">
 									<img src="${pageContext.request.contextPath }/assets/images/reply.png">
 								</c:if>
-								<a href="${pageContext.request.contextPath }/board/view/${vo.no }/${curPage }">${vo.title }</a>
+								<a href="${pageContext.request.contextPath }/board/view/${vo.no }?p=${map.curPage }&kwd=${map.kwd }">${vo.title }</a>
 							</td>
 							<td>${vo.user_name }</td>
 							<td>${vo.hit }</td>
 							<td>${vo.reg_date }</td>
 							
 							<c:if test="${vo.user_no eq authUser.no or authUser.no eq 32}">
-								<td><a href="${pageContext.request.contextPath }/board/delete/${vo.no }/${curPage }" class="del">삭제</a></td>
+								<td><a href="${pageContext.request.contextPath }/board/delete/${vo.no }?p=${map.curPage }" class="del">삭제</a></td>
 							</c:if>
 							 
 						</tr>
@@ -56,25 +56,25 @@
 				<div class="pager">
 				
 					<ul>
-						<c:if test="${curPage ge 2}">
-							<li><a href="${pageContext.request.contextPath }/board/${begin-1 < 1 ? 1 : begin-1 }">◀</a></li>
+						<c:if test="${map.curPage ge 2}">
+							<li><a href="${pageContext.request.contextPath }/board?p=${map.begin-1 < 1 ? 1 : map.begin-1 }&kwd=${map.kwd }">◀</a></li>
 						</c:if>
 						
-						<c:forEach var="i" begin="${begin }" end="${end }">
+						<c:forEach var="i" begin="${map.begin }" end="${map.end }">
 						
 							<c:choose>
-								<c:when test="${curPage eq i }">
+								<c:when test="${map.curPage eq i }">
 									<li class="selected">${i }</li>
 								</c:when>
 								<c:otherwise>
-									<li><a href="${pageContext.request.contextPath }/board/${i }">${i }</a></li>
+									<li><a href="${pageContext.request.contextPath }/board?p=${i }&kwd=${map.kwd }">${i }</a></li>
 								</c:otherwise>
 							</c:choose>
 							
 						</c:forEach>
 						
-						<c:if test="${curPage lt pageLength}">
-							<li><a href="${pageContext.request.contextPath }/board/${(end+1) > pageLength ? pageLength : end+1 }">▶</a></li>
+						<c:if test="${map.curPage lt map.totalPageLength}">
+							<li><a href="${pageContext.request.contextPath }/board?p=${(map.end+1) > map.totalPageLength ? map.totalPageLength : map.end+1 }&kwd=${map.kwd }">▶</a></li>
 						</c:if>
 						
 					</ul>

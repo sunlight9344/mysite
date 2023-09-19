@@ -1,6 +1,7 @@
 package com.poscodx.mysite.controller;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,65 +20,52 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
-	private int listPerPage = 5;
-	private int showPageLength = 5;
 	
-	@RequestMapping(value="/{curPage}")
-	public String list(@PathVariable("curPage") int curPage,
+	@RequestMapping(value="")
+	public String list(
+			@RequestParam(value="p", required=true, defaultValue="1") int curPage,
+			@RequestParam(value="kwd", required=true, defaultValue="") String kwd,
 			Model model) {
-
-		int allLength = boardService.findAllCount("");
-		int totalPageLength = allLength/listPerPage + 1;
-		int begin = ((curPage-1)/listPerPage)*listPerPage + 1;
-		int end = (begin+showPageLength-1<=totalPageLength) ? begin+showPageLength-1:totalPageLength;
-		if (curPage < 1 || curPage > totalPageLength) {
-			curPage = 1;
-		}
-		List<BoardVo> list = boardService.getContentsList(curPage, listPerPage, "");
 		
-		model.addAttribute("list", list);
-		model.addAttribute("pageLength", totalPageLength);
-		model.addAttribute("curPage", curPage);
-		model.addAttribute("listPerPage", listPerPage);
-		model.addAttribute("begin", begin);
-		model.addAttribute("end", end);
-		model.addAttribute("allLength", allLength);
-		model.addAttribute("kwd", "");
+		model.addAttribute("map",boardService.getContentsList(curPage, kwd));
 		
 		return "board/list";
 	}
 	
-	@RequestMapping(value="/view/{no}/{curPage}")
+	@RequestMapping(value="/view/{no}")
 	public String view(
 			@PathVariable("no") int no,
-			@PathVariable("curPage") int curPage,
 			Model model) {
+		
 		BoardVo vo = boardService.getBoardInfoByNo(no);
 		model.addAttribute("vo", vo);
-		model.addAttribute("curPage", curPage);
+		
 		return "board/view";
 	}
 	
-	@RequestMapping(value="/write/{no}", method=RequestMethod.GET)
-	public String write(
-			@PathVariable("no") int no) {
-		return "";
-	}
-	
-	@RequestMapping(value="/write/{no}", method=RequestMethod.POST)
-	public String write(
+	@RequestMapping(value="/modify/{no}", method=RequestMethod.GET)
+	public String modify(
 			@PathVariable("no") int no,
-			@RequestParam(value="title", required=true, defaultValue="") String title) {
-		return "";
-	}
-	
-	@RequestMapping(value="/write", method=RequestMethod.POST)
-	public String write(
-			@RequestParam(value="title", required=true, defaultValue="") String title,
-			@RequestParam(value="contents", required=true, defaultValue="") String contents
+			Model model
 			) {
-		boardService.insert(title, contents);
-		return "";
+		
+		BoardVo vo = boardService.getBoardInfoByNo(no);
+		model.addAttribute("vo", vo);
+		
+		return "board/modify";
 	}
 	
+	@RequestMapping(value="/modify/{no}", method=RequestMethod.POST)
+	public String modify(
+			@PathVariable("no") int no,
+			@RequestParam(value="p", required=true, defaultValue="1") int curPage,
+			@RequestParam(value="kwd", required=true, defaultValue="") String kwd,
+			@RequestParam(value="title", required=true, defaultValue="") String title,
+			@RequestParam(value="content", required=true, defaultValue="") String content,
+			Model model
+			) {
+		
+		boardService.update(no, title, content);
+		return "redirect:/board/view/" + no + "?p=" + curPage +"&kwd=" + kwd;
+	}
 }

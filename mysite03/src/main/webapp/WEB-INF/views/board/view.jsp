@@ -33,11 +33,11 @@
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath }/board/${curPage }">글목록</a>
+					<a href="${pageContext.request.contextPath }/board?p=${param.p }&kwd=${param.kwd }">글목록</a>
 					
 					<c:choose>
 						<c:when test="${authUser.no eq vo.user_no }">
-							<a href="${pageContext.request.contextPath }/board/modify/no=${vo.no }/${curPage }">수정</a>
+							<a href="${pageContext.request.contextPath }/board/modify/${vo.no }?p=${param.p }&kwd=${param.kwd }">수정</a>
 						</c:when>
 					</c:choose>
 					
