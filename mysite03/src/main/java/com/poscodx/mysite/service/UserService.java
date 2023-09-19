@@ -21,12 +21,8 @@ public class UserService {
 	}
 
 	public void join(UserVo vo) {
-		System.out.println(vo);
 		userRepository.insert(vo);
-		System.out.println(vo);
-		
 //		mailSender.send(vo.getEmail(), "title", "contents");
-		
 	}
 
 	public UserVo getUser(String email, String password) {

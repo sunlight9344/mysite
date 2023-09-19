@@ -21,7 +21,7 @@
 	
 	<insert id="insert" parameterType="uservo">
 		<![CDATA[
-			insert into user values(null, #{name }, #{email }, password(#{password }), #{gender }, current_date())
+			insert into user values(null, #{name }, #{email }, password(#{password }), #{gender }, now())
 		]]>
 		<selectKey keyProperty="no" resultType="long" order="AFTER">
 			<![CDATA[

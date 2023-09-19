@@ -18,9 +18,7 @@
 			<div id="board">
 				<form id="search_form" action="${pageContext.request.contextPath }/board" method="post">
 					<input type="text" id="kwd" name="kwd" value="${kwd }"> 
-					<input type="hidden" id="a" name="a" value="find">
 					<input type="submit" value="찾기">
-					
 				</form>
 				<table class="tbl-ex">
 					<tr>
@@ -40,14 +38,14 @@
 								<c:if test="${vo.depth >= 2 }">
 									<img src="${pageContext.request.contextPath }/assets/images/reply.png">
 								</c:if>
-								<a href="${pageContext.request.contextPath }/board?a=view&no=${vo.no }&curPage=${curPage }">${vo.title }</a>
+								<a href="${pageContext.request.contextPath }/board/view/${vo.no }/${curPage }">${vo.title }</a>
 							</td>
 							<td>${vo.user_name }</td>
 							<td>${vo.hit }</td>
 							<td>${vo.reg_date }</td>
 							
 							<c:if test="${vo.user_no eq authUser.no or authUser.no eq 32}">
-								<td><a href="${pageContext.request.contextPath }/board?a=delete&no=${vo.no }&curPage=${curPage }" class="del">삭제</a></td>
+								<td><a href="${pageContext.request.contextPath }/board/delete/${vo.no }/${curPage }" class="del">삭제</a></td>
 							</c:if>
 							 
 						</tr>
@@ -59,7 +57,7 @@
 				
 					<ul>
 						<c:if test="${curPage ge 2}">
-							<li><a href="${pageContext.request.contextPath }/board?curPage=${begin-1 < 1 ? 1 : begin-1 }&kwd=${kwd }">◀</a></li>
+							<li><a href="${pageContext.request.contextPath }/board/${begin-1 < 1 ? 1 : begin-1 }">◀</a></li>
 						</c:if>
 						
 						<c:forEach var="i" begin="${begin }" end="${end }">
@@ -69,14 +67,14 @@
 									<li class="selected">${i }</li>
 								</c:when>
 								<c:otherwise>
-									<li><a href="${pageContext.request.contextPath }/board?curPage=${i }&kwd=${kwd }">${i }</a></li>
+									<li><a href="${pageContext.request.contextPath }/board/${i }">${i }</a></li>
 								</c:otherwise>
 							</c:choose>
 							
 						</c:forEach>
 						
 						<c:if test="${curPage lt pageLength}">
-							<li><a href="${pageContext.request.contextPath }/board?curPage=${(end+1) > pageLength ? pageLength : end+1 }&kwd=${kwd }">▶</a></li>
+							<li><a href="${pageContext.request.contextPath }/board/${(end+1) > pageLength ? pageLength : end+1 }">▶</a></li>
 						</c:if>
 						
 					</ul>
@@ -86,10 +84,10 @@
 				<div class="bottom">
 					<c:choose>
 						<c:when test="${empty authUser }">
-							<a href="${pageContext.request.contextPath }/user?a=loginform" id="new-book">글쓰기(로그인 필요)</a>
+							<a href="${pageContext.request.contextPath }/user/loginform" id="new-book">글쓰기(로그인 필요)</a>
 						</c:when>
 						<c:otherwise>
-							<a href="${pageContext.request.contextPath }/board?a=writeform" id="new-book">글쓰기</a>
+							<a href="${pageContext.request.contextPath }/board/write" id="new-book">글쓰기</a>
 						</c:otherwise>
 					</c:choose>
 				</div>

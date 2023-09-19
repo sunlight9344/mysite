@@ -30,7 +30,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/joinsuccess", method=RequestMethod.GET)
-	public String joinsuccess(UserVo userVo) {
+	public String joinsuccess() {
 		return "user/joinsuccess";
 	}
 	
