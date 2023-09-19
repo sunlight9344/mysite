@@ -45,7 +45,7 @@
 							<td>${vo.reg_date }</td>
 							
 							<c:if test="${vo.user_no eq authUser.no or authUser.no eq 32}">
-								<td><a href="${pageContext.request.contextPath }/board/delete/${vo.no }?p=${map.curPage }" class="del">삭제</a></td>
+								<td><a href="${pageContext.request.contextPath }/board/delete/${vo.no }?p=${map.curPage }" class="del" style="background-image:url(${pageContext.request.contextPath }/assets/images/recycle.png)">삭제</a></td>
 							</c:if>
 							 
 						</tr>
@@ -54,7 +54,6 @@
 
 				<!-- pager 추가 -->
 				<div class="pager">
-				
 					<ul>
 						<c:if test="${map.curPage ge 2}">
 							<li><a href="${pageContext.request.contextPath }/board?p=${map.begin-1 < 1 ? 1 : map.begin-1 }&kwd=${map.kwd }">◀</a></li>

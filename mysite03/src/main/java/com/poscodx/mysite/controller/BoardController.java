@@ -1,8 +1,5 @@
 package com.poscodx.mysite.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,4 +65,15 @@ public class BoardController {
 		boardService.update(no, title, content);
 		return "redirect:/board/view/" + no + "?p=" + curPage +"&kwd=" + kwd;
 	}
+	
+	@RequestMapping(value="/delete/{no}")
+	public String delete(
+			@PathVariable("no") int no,
+			@RequestParam(value="p", required=true, defaultValue="1") int curPage) {
+		
+		boardService.deleteByNo(no);
+		
+		return "redirect:/board?p=" + curPage;
+	}
+	
 }

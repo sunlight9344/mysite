@@ -47,7 +47,7 @@
 							<td>${vo.reg_date }</td>
 							
 							<c:if test="${vo.user_no eq authUser.no or authUser.no eq 32}">
-								<td><a href="${pageContext.request.contextPath }/board?a=delete&no=${vo.no }&curPage=${curPage }" class="del">삭제</a></td>
+								<td><a href="${pageContext.request.contextPath }/board?a=delete&no=${vo.no }&curPage=${curPage }" class="del" >삭제</a></td>
 							</c:if>
 							 
 						</tr>

@@ -58,4 +58,8 @@ public class BoardService {
 		boardRepository.ModifyByNo(no, title, content);
 	}
 
+	public void deleteByNo(int no) {
+		boardRepository.DeleteByNo(no);
+	}
+
 }
