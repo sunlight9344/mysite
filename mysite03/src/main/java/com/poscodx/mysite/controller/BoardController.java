@@ -84,8 +84,6 @@ public class BoardController {
 		
 		return "redirect:/board?p=" + curPage;
 	}
-	
-
 	/*
 	 * /board/write/10
 	 * 

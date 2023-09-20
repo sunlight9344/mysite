@@ -22,11 +22,20 @@
 	 -->
 	<mvc:annotation-driven />
 
-	<!-- Default Servlet
-	
-	
-	 Handler -->
+	<!-- Default Servlet Handler -->
 	<mvc:default-servlet-handler/>
+	
+	<!-- Inteceptors -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/auth"/>
+			<bean class="com.poscodx.mysite.security.LoginInterceptor"/>
+		</mvc:interceptor>
+				<mvc:interceptor>
+			<mvc:mapping path="/user/logout"/>
+			<bean class="com.poscodx.mysite.security.LogoutInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 	<!-- View Resolver -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
