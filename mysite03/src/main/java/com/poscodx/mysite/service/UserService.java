@@ -29,11 +29,12 @@ public class UserService {
 		return userRepository.findByEmailAndPassword(email, password);
 	}
 
-	public UserVo getUser(Long no) {
+	public UserVo getUser(int no) {
 		return userRepository.findByNo(no);
 	}
 	
 	public void update(UserVo userVo) {
+		System.out.println(userVo);
 		userRepository.update(userVo);
 	}
 }

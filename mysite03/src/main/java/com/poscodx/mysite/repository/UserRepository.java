@@ -27,7 +27,7 @@ public class UserRepository {
 		return sqlSession.insert("user.insert", vo) == 1;
 	}
 
-	public UserVo findByNo(Long no) {
+	public UserVo findByNo(int no) {
 		return sqlSession.selectOne("user.findByNo", no);
 	}
 

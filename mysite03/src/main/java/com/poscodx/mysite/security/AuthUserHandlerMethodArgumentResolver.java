@@ -27,7 +27,6 @@ public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgum
 		
 		HttpServletRequest request = (HttpServletRequest)webRequest.getNativeRequest();
 		HttpSession session = request.getSession();
-		
 		return session.getAttribute("authUser");
 	}
 
@@ -44,6 +43,6 @@ public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgum
 		if(!parameter.getParameterType().equals(UserVo.class)) {
 			return false;
 		}
-		return false;
+		return true;
 	}
 }

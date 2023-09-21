@@ -43,7 +43,7 @@ public class UserController {
 	public String update(@AuthUser UserVo authUser, Model model) {
 
 		UserVo userVo = userService.getUser(authUser.getNo());
-		model.addAttribute("userVo",userVo);
+		model.addAttribute("userVo", userVo);
 		
 		return "user/update";
 	}
@@ -55,7 +55,6 @@ public class UserController {
 		userService.update(userVo);
 		
 		authUser.setName(userVo.getName());
-		
 		return "redirect:/user/update";
 	}
 

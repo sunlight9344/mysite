@@ -1,12 +1,13 @@
 package com.poscodx.mysite.vo;
 
 public class UserVo {
-	private Long no;
+	private int no;
 	private String name;
 	private String email;
 	private String password;
 	private String gender;
 	private String joinDate;
+	private String role;
 	
 	public UserVo(String name, String email, String password, String gender) {
 		this.name = name;
@@ -20,14 +21,14 @@ public class UserVo {
 
 	@Override
 	public String toString() {
-		return "UesrVo [no=" + no + ", name=" + name + ", email=" + email + ", password=" + password + ", gender="
-				+ gender + ", joindDate=" + joinDate + "]";
+		return "UserVo [no=" + no + ", name=" + name + ", email=" + email + ", password=" + password + ", gender="
+				+ gender + ", joinDate=" + joinDate + ", role=" + role + "]";
 	}
 	
-	public Long getNo() {
+	public int getNo() {
 		return no;
 	}
-	public void setNo(Long no) {
+	public void setNo(int no) {
 		this.no = no;
 	}
 	public String getName() {
@@ -59,6 +60,14 @@ public class UserVo {
 	}
 	public void setJoinDate(String joindDate) {
 		this.joinDate = joindDate;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 }
