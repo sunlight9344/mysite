@@ -5,8 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.poscodx.mysite.security.Auth;
+import com.poscodx.mysite.service.FileUploadService;
 import com.poscodx.mysite.service.SiteService;
 import com.poscodx.mysite.vo.SiteVo;
 
@@ -18,6 +20,9 @@ public class AdminController {
 	@Autowired
 	private SiteService siteService;
 	
+	@Autowired
+	private FileUploadService fileUploadService;
+	
 	@RequestMapping("")
 	public String main(Model model) {
 		SiteVo siteVo = siteService.getSite();
@@ -25,8 +30,14 @@ public class AdminController {
 		return "admin/main";
 	}
 	
-	@RequestMapping(value="/main/update")
-	public String update(SiteVo siteVo) {
+	@RequestMapping(value="/main/update", method=RequestMethod.POST)
+	public String update(
+			SiteVo siteVo,
+			MultipartFile file
+			) {
+		
+		String url = fileUploadService.restore(file);
+		siteVo.setProfile(url);
 		siteService.UpdateSite(siteVo);
 		return "redirect:/admin";
 	}
