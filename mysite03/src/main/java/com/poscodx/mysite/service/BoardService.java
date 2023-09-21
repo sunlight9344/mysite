@@ -27,6 +27,7 @@ public class BoardService {
 		}
 		int begin = ((curPage-1) / LIST_PER_PAGE) * LIST_PER_PAGE + 1;
 		int end = (begin + SHOW_PAGE_LENGTH - 1 <= totalPageLength) ? begin + SHOW_PAGE_LENGTH - 1 : totalPageLength;
+		
 		List<BoardVo> list = boardRepository.findAll(curPage, LIST_PER_PAGE, kwd);
 		
 		Map<String, Object> map = new HashMap<>();
@@ -54,8 +55,8 @@ public class BoardService {
 		boardRepository.BoardInsert(null);
 	}
 	
-	public void update(int no, String title, String content) {
-		boardRepository.ModifyByNo(no, title, content);
+	public void modify(BoardVo boardVo) {
+		boardRepository.ModifyByNo(boardVo);
 	}
 
 	public void deleteByNo(int no) {

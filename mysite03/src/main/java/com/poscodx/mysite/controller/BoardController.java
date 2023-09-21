@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.poscodx.mysite.security.Auth;
+import com.poscodx.mysite.security.AuthUser;
 import com.poscodx.mysite.service.BoardService;
 import com.poscodx.mysite.vo.BoardVo;
 import com.poscodx.mysite.vo.UserVo;
@@ -60,12 +62,11 @@ public class BoardController {
 			@PathVariable("no") int no,
 			@RequestParam(value="p", required=true, defaultValue="1") int curPage,
 			@RequestParam(value="kwd", required=true, defaultValue="") String kwd,
-			@RequestParam(value="title", required=true, defaultValue="") String title,
-			@RequestParam(value="content", required=true, defaultValue="") String content,
+			BoardVo boardVo,
 			Model model
 			) {
 		
-		boardService.update(no, title, content);
+		boardService.modify(boardVo);
 		return "redirect:/board/view/" + no + "?p=" + curPage +"&kwd=" + kwd;
 	}
 	
@@ -84,12 +85,4 @@ public class BoardController {
 		
 		return "redirect:/board?p=" + curPage;
 	}
-	/*
-	 * /board/write/10
-	 * 
-	 * /board/write
-	 * 
-	 * 
-	 * 
-	 */
 }
