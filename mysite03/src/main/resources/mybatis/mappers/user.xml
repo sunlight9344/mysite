@@ -23,7 +23,7 @@
 		<![CDATA[
 			insert into user values(null, #{name }, #{email }, password(#{password }), #{gender }, current_date(), 'USER')
 		]]>
-		<selectKey keyProperty="no" resultType="long" order="AFTER">
+		<selectKey keyProperty="no" resultType="int" order="AFTER">
 			<![CDATA[
 				select last_insert_id();
 			]]>

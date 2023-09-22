@@ -29,7 +29,7 @@ public class BoardController {
 			@RequestParam(value="kwd", required=true, defaultValue="") String kwd,
 			Model model) {
 		
-		model.addAttribute("map",boardService.getContentsList(curPage, kwd));
+		model.addAllAttributes(boardService.getContentsList(curPage, kwd));
 		
 		return "board/list";
 	}
@@ -62,8 +62,7 @@ public class BoardController {
 			@PathVariable("no") int no,
 			@RequestParam(value="p", required=true, defaultValue="1") int curPage,
 			@RequestParam(value="kwd", required=true, defaultValue="") String kwd,
-			BoardVo boardVo,
-			Model model
+			BoardVo boardVo
 			) {
 		
 		boardService.modify(boardVo);
