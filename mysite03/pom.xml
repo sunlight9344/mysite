@@ -49,6 +49,13 @@
 			<version>${org-springframework-version}</version>
 		</dependency>
 
+		<!-- validation -->
+		<dependency>
+		   <groupId>org.hibernate.validator</groupId>
+		   <artifactId>hibernate-validator</artifactId>
+		   <version>6.2.4.Final</version>
+		</dependency>
+
 		<!-- jstl -->
 		<dependency>
 			<groupId>jstl</groupId>
@@ -107,7 +114,7 @@
 			<version>2.2</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- fileupload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
