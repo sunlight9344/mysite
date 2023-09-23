@@ -1,14 +1,19 @@
 package com.poscodx.mysite.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
+import com.poscodx.mysite.listener.SiteEvent;
 import com.poscodx.mysite.repository.SiteRepository;
 import com.poscodx.mysite.vo.SiteVo;
 
 @Service
 public class SiteService {
 
+	@Autowired
+	private ApplicationEventPublisher publisher; 
+	
 	@Autowired
 	private SiteRepository siteRepository;
 	
@@ -17,6 +22,8 @@ public class SiteService {
 	}
 	
 	public void UpdateSite(SiteVo vo) {
+		System.out.println("update-------");
+		publisher.publishEvent(new SiteEvent(vo));
 		siteRepository.update(vo);
 	}
 }

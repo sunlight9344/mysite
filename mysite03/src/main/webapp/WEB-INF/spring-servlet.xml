@@ -65,11 +65,16 @@
 	   <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 	   <property name="prefix" value="/WEB-INF/views/" />
 	   <property name="suffix" value=".jsp" />
-	   <property name="exposeContextBeansAttributes" value="true" />
-	   <property name="exposedContextBeansNames">
+	   <property name="exposeContextBeansAsAttributes" value="true" />
+	   <property name="exposedContextBeanNames">
 	   		<list>
-	   			<value>site</value> <!-- 이거는 뭐냐면은 내가 sitevo를 eventListner에서 만들고 밖에서 가져올거아냐 받았어 이안에 정보가 있는거지 이거를 안에 등록할 때 코드에서 해야해
-	   			그 떄 아이디가 있어 그 떄 아이디를 넣어줘야하는거지 헷갈리니까 site 라고 할 게 어차피 이름으로 접근할거니까 bean에 등록할 때 site 로 등록 하면 댐-->
+	   			<value>site</value> 
+	   			<!-- 
+	   			이거는 뭐냐면은 내가 sitevo를 eventListner에서 만들고 밖에서
+	   			가져올거아냐 받았어 이안에 정보가 있는거지 이거를 안에 등록할 때 코드에서 해야해
+	   			그 떄 아이디가 있어 그 떄 아이디를 넣어줘야하는거지 헷갈리니까 site
+	   		    라고 할 게 어차피 이름으로 접근할거니까 bean에 등록할 때 site 로 등록 하면 댐
+	   		    -->
 	   		</list>
 	   </property>
 	</bean>
