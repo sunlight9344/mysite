@@ -1,14 +1,12 @@
 package com.poscodx.mysite.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.poscodx.mysite.listener.Site;
 import com.poscodx.mysite.security.Auth;
 import com.poscodx.mysite.service.FileUploadService;
 import com.poscodx.mysite.service.SiteService;
@@ -19,8 +17,8 @@ import com.poscodx.mysite.vo.SiteVo;
 @RequestMapping("/admin")
 public class AdminController {
 	
-	@Autowired
-	private ApplicationContext applicationContext;
+//	@Autowired
+//	private ApplicationContext applicationContext;
 	
 	@Autowired
 	private SiteService siteService;

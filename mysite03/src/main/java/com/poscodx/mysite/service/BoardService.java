@@ -41,18 +41,16 @@ public class BoardService {
 		map.put("allCount", allCount);
 		map.put("kwd", kwd);
 		
-//		for(BoardVo vo:list) {
-//			System.out.println(vo);
-//		}
+		for(BoardVo vo:list) {
+			System.out.println(vo);
+		}
+		
 		return map;
 	}
 
 	public BoardVo getBoardInfoByNo(int no) {
+		boardRepository.UpdateHit(no);
 		return boardRepository.getBoardInfoByNo(no);
-	}
-
-	public void insert(String title, String contents) {
-		boardRepository.BoardInsert(null);
 	}
 	
 	public void modify(BoardVo boardVo) {
@@ -63,4 +61,7 @@ public class BoardService {
 		boardRepository.DeleteByNo(no);
 	}
 
+	public void write(BoardVo boardVo) {
+		boardRepository.write(boardVo);
+	}
 }

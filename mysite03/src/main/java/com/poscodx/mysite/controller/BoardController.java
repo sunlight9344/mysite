@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.poscodx.mysite.security.Auth;
 import com.poscodx.mysite.security.AuthUser;
 import com.poscodx.mysite.service.BoardService;
 import com.poscodx.mysite.vo.BoardVo;
@@ -83,5 +82,26 @@ public class BoardController {
 		boardService.deleteByNo(no);
 		
 		return "redirect:/board?p=" + curPage;
+	}
+	
+	@RequestMapping(value="/write", method=RequestMethod.GET)
+	public String write() {
+		return "board/write";
+	}
+	
+	@RequestMapping(value="/write", method=RequestMethod.POST)
+	public String write(@AuthUser UserVo authUser, BoardVo boardVo) {
+		
+		boardVo.setUser_no(authUser.getNo());
+		boardService.write(boardVo);
+		
+		return "redirect:/board";
+	}
+	
+	@RequestMapping(value="/reply", method=RequestMethod.GET)
+	public String reply(
+			@PathVariable("no") int no
+			) {
+		return "board/write";
 	}
 }

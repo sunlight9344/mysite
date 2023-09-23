@@ -31,7 +31,7 @@
 					</tr>
 					
 					<c:forEach items="${list }" var="vo" varStatus="status"> 
-					<c:set var="cnt" value="${allCount- (curPage-1)*listPerPage }" />
+					<c:set var="cnt" value="${allCount - (curPage-1)*listPerPage }" />
 						<tr>
 							<td>[${cnt-status.index}]</td>
 							<td style="padding-left: ${(vo.depth-1)*30 }px">

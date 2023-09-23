@@ -21,6 +21,10 @@ public class BoardRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	public void UpdateHit(int no) {
+		sqlSession.update("board.updateHit", no);
+	}
+	
 	public int findAllCount(String tempKwd) {
 		String kwd = "%" + tempKwd + "%";
 		return sqlSession.selectOne("board.count", kwd);
@@ -32,10 +36,10 @@ public class BoardRepository {
 	
 	public List<BoardVo> findAll(int curPage, int listPerPage, String kwd) {
 		Map<String, Object> map = new HashMap<>();
-		map.put("curPage", curPage);
+		int tempCurPage = (curPage-1)*listPerPage;
+		map.put("curPage", tempCurPage);
 		map.put("listPerPage", listPerPage);
 		map.put("kwd", "%" + kwd + "%");
-		
 		return sqlSession.selectList("board.findAll", map);
 	}
 	
@@ -43,80 +47,11 @@ public class BoardRepository {
 		return sqlSession.selectOne("board.getBoardInfoByNo", no);
 	}
 	
-	public void BoardInsert(BoardVo vo) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		try {
-			conn = getConnection();
-			
-			String sql = "insert into board values(null, ?, ?, 0, current_time(), ?, ?, ?, ?)";
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, vo.getTitle());
-			pstmt.setString(2, vo.getContents());
-			pstmt.setInt(3, vo.getG_no());
-			pstmt.setInt(4, vo.getO_no());
-			pstmt.setInt(5, vo.getDepth());
-			pstmt.setInt(6, vo.getUser_no());
-			
-			pstmt.executeQuery();
-			
-		} catch (SQLException e) {
-			System.out.println("error:" + e);
-		} finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(conn != null) {
-					conn.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+	public void write(BoardVo boardVo) {
+		sqlSession.insert("board.insert", boardVo);
 	}
 
-	public int FindMaxGno() {
-		int result = 0;
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs =  null;
-		try {
-			conn = getConnection();
-			
-			String sql = "select max(g_no) as result"
-					+ " from board";
-			
-			pstmt = conn.prepareStatement(sql);
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				result = rs.getInt(1);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("error:" + e);
-		} finally {
-			try {
-				if(rs != null) {
-					rs.close();
-				}
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(conn != null) {
-					conn.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return result;
-	}
-
-	public void Update(int g_no, int o_no) {
+	public void refreshNo(int g_no, int o_no) {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -185,39 +120,7 @@ public class BoardRepository {
 		}
 	}
 
-	public void UpdateHit(int no) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs =  null;
-		try {
-			conn = getConnection();
-			
-			String sql = "update board"
-					+ " set hit = hit + 1"
-					+ " where no = ?";
-			
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, no);
-			pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			System.out.println("error:" + e);
-		} finally {
-			try {
-				if(rs != null) {
-					rs.close();
-				}
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				if(conn != null) {
-					conn.close();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
+
 	
 	private Connection getConnection() throws SQLException {
 
