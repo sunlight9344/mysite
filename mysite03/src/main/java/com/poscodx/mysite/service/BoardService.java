@@ -61,7 +61,14 @@ public class BoardService {
 		boardRepository.DeleteByNo(no);
 	}
 
-	public void write(BoardVo boardVo) {
+	public void write(BoardVo boardVo, int n) {
+		if(n != -1) {
+			BoardVo tmpVo = boardRepository.getBoardInfoByNo(n);
+			boardVo.setG_no(tmpVo.getG_no());
+			boardVo.setO_no(tmpVo.getO_no()+1);
+			boardVo.setDepth(tmpVo.getDepth()+1);
+			boardRepository.refreshNo(tmpVo.getG_no(), tmpVo.getO_no()+1);
+		}
 		boardRepository.write(boardVo);
 	}
 }

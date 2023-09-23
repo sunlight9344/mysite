@@ -86,7 +86,7 @@
 							<a href="${pageContext.request.contextPath }/user/login" id="new-book">글쓰기(로그인 필요)</a>
 						</c:when>
 						<c:otherwise>
-							<a href="${pageContext.request.contextPath }/board/write" id="new-book">글쓰기</a>
+							<a href="${pageContext.request.contextPath }/board/write?n=${-1 }" id="new-book">글쓰기</a>
 						</c:otherwise>
 					</c:choose>
 				</div>

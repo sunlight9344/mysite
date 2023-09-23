@@ -4,11 +4,30 @@
 <mapper namespace="board">
 
 	<select id="insert" parameterType="boardvo">
-		<![CDATA[
-		  insert into board values(null, #{title}, #{contents}, 0, current_time(), (select ifnull(max(g_no),0)+1 from board a), 1, 1, #{user_no});
-		]]>
+		  <choose>
+			<when test="g_no == 0">
+				<![CDATA[
+				insert into board values(null, #{title}, #{contents}, 0, current_time(), (select ifnull(max(g_no),0)+1 from board a), 1, 1, #{user_no});
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+				insert
+				  into board
+				values (null,
+						#{title },
+						#{contents },
+						0,
+						now(),
+						#{g_no },
+						#{o_no }, 
+						#{depth }, 
+						#{user_no })				
+				]]>
+			</otherwise>
+		</choose>
 	</select>
-
+	
 	<select id="modify" parameterType="boardvo">
 		<![CDATA[
 		  update board set title = #{title }, contents = #{contents }, reg_date = current_time() where no = #{no }
@@ -46,6 +65,20 @@
 		update board
 		set hit = hit + 1
 		where no = #{no }
+		]]>
+	</select>
+	
+	<select id="refresh" parameterType="map">
+		<![CDATA[
+		update board
+		set o_no = o_no + 1
+		where g_no = #{g_no} and o_no >= #{o_no}
+		]]>
+	</select>
+	
+	<select id="delete" parameterType="int">
+		<![CDATA[
+		delete from board where no = #{no}
 		]]>
 	</select>
 </mapper>

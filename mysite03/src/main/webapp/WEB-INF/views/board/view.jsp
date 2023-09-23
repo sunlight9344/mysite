@@ -46,7 +46,7 @@
 							<a href="${pageContext.request.contextPath }/user/login" id="new-book">답글쓰기(로그인 필요)</a>
 						</c:when>
 						<c:otherwise>
-							<a href="${pageContext.request.contextPath }/board/reply/${vo.no }" id="new-book">답글쓰기</a>
+							<a href="${pageContext.request.contextPath }/board/write?n=${vo.no }" id="new-book">답글쓰기</a>
 						</c:otherwise>
 					</c:choose>
 				</div>

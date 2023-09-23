@@ -49,7 +49,6 @@ public class BoardController {
 			@PathVariable("no") int no,
 			Model model
 			) {
-		
 		BoardVo vo = boardService.getBoardInfoByNo(no);
 		model.addAttribute("vo", vo);
 		
@@ -63,7 +62,6 @@ public class BoardController {
 			@RequestParam(value="kwd", required=true, defaultValue="") String kwd,
 			BoardVo boardVo
 			) {
-		
 		boardService.modify(boardVo);
 		return "redirect:/board/view/" + no + "?p=" + curPage +"&kwd=" + kwd;
 	}
@@ -90,18 +88,14 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/write", method=RequestMethod.POST)
-	public String write(@AuthUser UserVo authUser, BoardVo boardVo) {
-		
+	public String write(
+			@AuthUser UserVo authUser, 
+			BoardVo boardVo,
+			int n
+			) {
 		boardVo.setUser_no(authUser.getNo());
-		boardService.write(boardVo);
+		boardService.write(boardVo, n);
 		
 		return "redirect:/board";
-	}
-	
-	@RequestMapping(value="/reply", method=RequestMethod.GET)
-	public String reply(
-			@PathVariable("no") int no
-			) {
-		return "board/write";
 	}
 }
