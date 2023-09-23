@@ -17,6 +17,7 @@ public class MainController {
 	@RequestMapping("")
 	public String index(Model model) {
 		SiteVo siteVo = siteService.getSite();
+		siteService.UpdateSite(siteVo);
 		model.addAttribute("siteVo", siteVo);
 		return "main/index";
 	}

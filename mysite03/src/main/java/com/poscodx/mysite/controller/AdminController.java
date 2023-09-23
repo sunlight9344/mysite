@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.poscodx.mysite.listener.Site;
 import com.poscodx.mysite.security.Auth;
 import com.poscodx.mysite.service.FileUploadService;
 import com.poscodx.mysite.service.SiteService;
@@ -31,6 +32,11 @@ public class AdminController {
 	public String main(Model model) {
 		SiteVo siteVo = siteService.getSite();
 		model.addAttribute("siteVo", siteVo);
+		
+//		System.out.println("됐냐?----->" + applicationContext.containsBean("site"));
+//		Site siteBean = (Site)applicationContext.getBean("site");
+//		SiteVo tempVo = (SiteVo)siteBean.getSiteVo();
+//		System.out.println("temp:----->" + tempVo);
 		return "admin/main";
 	}
 	
