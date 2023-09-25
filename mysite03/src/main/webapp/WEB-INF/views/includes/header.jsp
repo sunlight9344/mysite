@@ -3,21 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.springframework.web.context.*, org.springframework.web.context.support.*"%>
-<%@ page import="com.poscodx.mysite.listener.SiteEventListener" %>
-<%@ page import="com.poscodx.mysite.vo.SiteVo" %>
-<%
-	ServletContext ctx = pageContext.getServletContext();
-	WebApplicationContext wac = WebApplicationContextUtils.getRequiredWebApplicationContext(ctx);
-	
-	SiteEventListener siteEventListener = (SiteEventListener) wac.getBean("listener");
-	SiteVo siteVo = (SiteVo) siteEventListener.getSiteVo();
-	
-	request.setAttribute("siteVo", siteVo);
-%>
 
 <div id="header">
-	<h1>${siteVo.title }</h1>
-	<h1>${site.title }</h1>
+	<h1>${testsite.testVo.title }</h1>
 	<ul>
 		<c:choose>
 			<c:when test="${empty authUser }">
