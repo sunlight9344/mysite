@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
-import com.poscodx.mysite.listener.Site;
-import com.poscodx.mysite.listener.SiteEvent;
 import com.poscodx.mysite.repository.SiteRepository;
 import com.poscodx.mysite.vo.SiteVo;
 
@@ -24,7 +22,7 @@ public class SiteService {
 	
 	public void UpdateSite(SiteVo vo) {
 		System.out.println("update-------");
-		publisher.publishEvent(new SiteEvent(vo));
+		publisher.publishEvent(vo);
 		siteRepository.update(vo);
 	}
 }
