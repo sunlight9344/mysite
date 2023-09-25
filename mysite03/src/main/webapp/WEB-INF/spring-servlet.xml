@@ -75,7 +75,6 @@
 	   <property name="exposedContextBeanNames">
 	   		<list>
 	   			<value>site</value> 
-	   			<value>siteEventListener</value> 
 	   			<value>testsite</value> 
 	   			<!-- 
 	   			이거는 뭐냐면은 내가 sitevo를 eventListner에서 만들고 밖에서

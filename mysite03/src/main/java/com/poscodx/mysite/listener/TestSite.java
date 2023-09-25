@@ -6,7 +6,6 @@ import com.poscodx.mysite.vo.SiteVo;
 
 @Component(value="testsite")
 public class TestSite {
-	
 	private SiteVo testVo;
 
 	public SiteVo getTestVo() {
@@ -16,5 +15,4 @@ public class TestSite {
 	public void setTestVo(SiteVo testVo) {
 		this.testVo = testVo;
 	}
-
 }
