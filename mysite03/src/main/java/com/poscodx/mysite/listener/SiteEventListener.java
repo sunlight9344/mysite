@@ -15,23 +15,23 @@ public class SiteEventListener {
 	@Autowired
 	private SiteService siteService;
 	
-	private SiteVo testSiteVo;
+	private SiteVo siteVo;
 	
 	@PostConstruct
     public void initialize() {
-        testSiteVo = siteService.getSite();
+		siteVo = siteService.getSite();
     }
     
     @EventListener
-    public void alram(SiteVo vo) {
-    	testSiteVo = vo;
+    public void alram(SiteVo siteVo) {
+    	this.siteVo = siteVo;
     }
 
-	public SiteVo getTestSiteVo() {
-		return testSiteVo;
+	public SiteVo getSiteVo() {
+		return siteVo;
 	}
 
-	public void setTestSiteVo(SiteVo testSiteVo) {
-		this.testSiteVo = testSiteVo;
+	public void setSiteVo(SiteVo siteVo) {
+		this.siteVo = siteVo;
 	}
 }

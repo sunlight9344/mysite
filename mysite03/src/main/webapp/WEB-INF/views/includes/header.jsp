@@ -10,13 +10,13 @@
 	WebApplicationContext wac = WebApplicationContextUtils.getRequiredWebApplicationContext(ctx);
 	
 	SiteEventListener siteEventListener = (SiteEventListener) wac.getBean("listener");
-	SiteVo testSiteVo = (SiteVo) siteEventListener.getTestSiteVo();
+	SiteVo siteVo = (SiteVo) siteEventListener.getSiteVo();
 	
-	request.setAttribute("testSiteVo", testSiteVo);
+	request.setAttribute("siteVo", siteVo);
 %>
 
 <div id="header">
-	<h1>${testSiteVo.title }</h1>
+	<h1>${siteVo.title }</h1>
 	<ul>
 		<c:choose>
 			<c:when test="${empty authUser }">

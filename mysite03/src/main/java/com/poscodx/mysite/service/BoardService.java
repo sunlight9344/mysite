@@ -41,10 +41,6 @@ public class BoardService {
 		map.put("allCount", allCount);
 		map.put("kwd", kwd);
 		
-		for(BoardVo vo:list) {
-			System.out.println(vo);
-		}
-		
 		return map;
 	}
 

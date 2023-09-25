@@ -31,10 +31,6 @@ public class AdminController {
 		SiteVo siteVo = siteService.getSite();
 		model.addAttribute("siteVo", siteVo);
 		
-//		System.out.println("됐냐?----->" + applicationContext.containsBean("site"));
-//		Site siteBean = (Site)applicationContext.getBean("site");
-//		SiteVo tempVo = (SiteVo)siteBean.getSiteVo();
-//		System.out.println("temp:----->" + tempVo);
 		return "admin/main";
 	}
 	

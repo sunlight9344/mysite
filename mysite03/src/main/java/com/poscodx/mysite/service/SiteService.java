@@ -21,7 +21,6 @@ public class SiteService {
 	}
 	
 	public void UpdateSite(SiteVo vo) {
-		System.out.println("update-------");
 		publisher.publishEvent(vo);
 		siteRepository.update(vo);
 	}
