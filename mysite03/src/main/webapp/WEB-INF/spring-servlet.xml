@@ -75,6 +75,7 @@
 	   <property name="exposedContextBeanNames">
 	   		<list>
 	   			<value>site</value> 
+	   			<value>siteEventListener</value> 
 	   			<!-- 
 	   			이거는 뭐냐면은 내가 sitevo를 eventListner에서 만들고 밖에서
 	   			가져올거아냐 받았어 이안에 정보가 있는거지 이거를 안에 등록할 때 코드에서 해야해

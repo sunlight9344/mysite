@@ -17,7 +17,7 @@
 
 <div id="header">
 	<h1>${siteVo.title }</h1>
-	<h1>${siteVo2.title }</h1>
+	<h1>${site.title }</h1>
 	<ul>
 		<c:choose>
 			<c:when test="${empty authUser }">
