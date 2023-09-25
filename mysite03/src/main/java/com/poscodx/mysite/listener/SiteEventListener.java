@@ -2,6 +2,7 @@ package com.poscodx.mysite.listener;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,9 @@ import com.poscodx.mysite.vo.SiteVo;
 
 @Component(value="listener")
 public class SiteEventListener {
+	
+//	@Autowired
+//	private ApplicationContext applicationContext;
 	
 	@Autowired
 	private SiteService siteService;
@@ -24,6 +28,9 @@ public class SiteEventListener {
     
     @EventListener
     public void alram(SiteVo siteVo) {
+    	
+//    	applicationContext.setAttribute("siteVo2", siteVo);
+    	
     	this.siteVo = siteVo;
     }
 

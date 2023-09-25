@@ -1,5 +1,7 @@
 package com.poscodx.mysite.controller;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,9 @@ public class AdminController {
 	
 //	@Autowired
 //	private ApplicationContext applicationContext;
+	
+	@Autowired
+	private ServletContext servletContext;
 	
 	@Autowired
 	private SiteService siteService;
@@ -43,6 +48,9 @@ public class AdminController {
 		String url = fileUploadService.restore(file);
 		siteVo.setProfile(url);
 		siteService.UpdateSite(siteVo);
+		
+		servletContext.setAttribute("siteVo", siteVo);
+		
 		return "redirect:/admin";
 	}
 	
