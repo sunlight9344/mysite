@@ -63,60 +63,17 @@
 					</c:if>
 				</div>
 				<ul>
+				<c:forEach items="${list }" var="vo" varStatus="status"> 
 					<li>
-						<a	href="${pageContext.request.contextPath }/assets/gallery-examples/im1.jpg"
+						<a href="${pageContext.request.contextPath }${vo.imageUrl}"
 							class="image"
 							data-lightbox="gallery"
-							style="background-image:url('${pageContext.request.contextPath }/assets/gallery-examples/im1.jpg')">&nbsp;</a>
+							style="background-image:url('${pageContext.request.contextPath }${vo.imageUrl }')">&nbsp;</a>
 						<c:if test="${not empty authUser && authUser.role=='ADMIN' }">
-							<a	href="" class="del-button" title="삭제">삭제</a>
+							<a	href="${pageContext.request.contextPath }/gallery/delete/${vo.no }" class="del-button" title="삭제">삭제</a>
 						</c:if>
-					</li>
-					<li>
-						<a	href="${pageContext.request.contextPath }/assets/gallery-examples/im2.jpg"
-							class="image"
-							data-lightbox="gallery"
-							style="background-image:url('${pageContext.request.contextPath }/assets/gallery-examples/im2.jpg')">&nbsp;</a>
-						<c:if test="${not empty authUser && authUser.role=='ADMIN' }">
-							<a	href="" class="del-button" title="삭제">삭제</a>
-						</c:if>
-					</li>
-					<li>
-						<a	href="${pageContext.request.contextPath }/assets/gallery-examples/im3.jpg"
-							class="image"
-							data-lightbox="gallery"
-							style="background-image:url('${pageContext.request.contextPath }/assets/gallery-examples/im3.jpg')">&nbsp;</a>
-						<c:if test="${not empty authUser && authUser.role=='ADMIN' }">
-							<a	href="" class="del-button" title="삭제">삭제</a>
-						</c:if>
-					</li>
-					<li>
-						<a	href="${pageContext.request.contextPath }/assets/gallery-examples/im5.jpg"
-							class="image"
-							data-lightbox="gallery"
-							style="background-image:url('${pageContext.request.contextPath }/assets/gallery-examples/im5.jpg')">&nbsp;</a>
-						<c:if test="${not empty authUser && authUser.role=='ADMIN' }">
-							<a	href="" class="del-button" title="삭제">삭제</a>
-						</c:if>
-					</li>
-					<li>
-						<a	href="${pageContext.request.contextPath }/assets/gallery-examples/im6.jpg"
-							class="image"
-							data-lightbox="gallery"
-							style="background-image:url('${pageContext.request.contextPath }/assets/gallery-examples/im6.jpg')">&nbsp;</a>
-						<c:if test="${not empty authUser && authUser.role=='ADMIN' }">
-							<a	href="" class="del-button" title="삭제">삭제</a>
-						</c:if>
-					</li>
-					<li>
-						<a	href="${pageContext.request.contextPath }/assets/gallery-examples/im3.jpg"
-							class="image"
-							data-lightbox="gallery"
-							style="background-image:url('${pageContext.request.contextPath }/assets/gallery-examples/im3.jpg')">&nbsp;</a>
-						<c:if test="${not empty authUser && authUser.role=='ADMIN' }">
-							<a	href="" class="del-button" title="삭제">삭제</a>
-						</c:if>
-					</li>																				
+					</li>					
+					</c:forEach>															
 				</ul>
 			</div>
 
@@ -131,6 +88,7 @@
 				</div>
 			</c:if>
 		</div>
+		
 		<c:import url="/WEB-INF/views/includes/navigation.jsp">
 			<c:param name="menu" value="gallery" />
 		</c:import>

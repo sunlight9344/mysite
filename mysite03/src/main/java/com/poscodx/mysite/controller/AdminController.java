@@ -42,7 +42,6 @@ public class AdminController {
 	
 	@RequestMapping(value="/main/update", method=RequestMethod.POST)
 	public String update(SiteVo siteVo, MultipartFile file) {
-		
 		SiteVo site = applicationContext.getBean(SiteVo.class);
 		String profile = fileUploadService.restore(file);
 		if(profile != null) {
