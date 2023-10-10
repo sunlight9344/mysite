@@ -23,13 +23,12 @@ public class GlobalExceptionHandler {
 			return "error/404";
 		}
 		
-		
-		//1. 로깅(Logging)
+		//2. 로깅(Logging)
 		StringWriter errors = new StringWriter();
 		e.printStackTrace(new PrintWriter(errors));
 		logger.error(errors.toString());
 		
-		//2. apple 페이지
+		//3. apple 페이지
 		model.addAttribute("errors", errors.toString());
 		return "error/exception";
 	}
