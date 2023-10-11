@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.poscodx.mysite.vo.SiteVo;
 
-@Component(value="testsite")
+@Component(value="TestSite")
 public class TestSite {
 	private SiteVo testVo;
 

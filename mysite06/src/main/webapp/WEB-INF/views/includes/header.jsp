@@ -5,7 +5,7 @@
 <%@ page import="org.springframework.web.context.*, org.springframework.web.context.support.*"%>
 
 <div id="header">
-	<h1>${testsite.testVo.title }</h1>
+	<h1>${TestSite.testVo.title }</h1>
 	<ul>
 		<c:choose>
 			<c:when test="${empty authUser }">
