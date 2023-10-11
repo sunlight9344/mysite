@@ -18,6 +18,7 @@
 	</properties>
 
 	<dependencies>
+		<!-- javax annotaion (postConstructor) -->
 		<dependency>
 			<groupId>javax.annotation</groupId>
 			<artifactId>javax.annotation-api</artifactId>
