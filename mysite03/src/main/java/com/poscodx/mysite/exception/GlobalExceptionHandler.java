@@ -9,13 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	private static final Log logger = LogFactory.getLog(GlobalExceptionHandler.class);
 	
 	@ExceptionHandler
 	public String handlerException(Model model, Exception e) {
+		
+		System.out.println("-------> global exception called");
 		//1. 로깅(Logging)
 		StringWriter errors = new StringWriter();
 		e.printStackTrace(new PrintWriter(errors));

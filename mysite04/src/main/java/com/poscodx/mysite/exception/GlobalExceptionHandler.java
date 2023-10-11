@@ -16,6 +16,7 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler
 	public String handlerException(Model model, Exception e) {
+		System.out.println("------> globalexception called");
 		//1. 로깅(Logging)
 		StringWriter errors = new StringWriter();
 		e.printStackTrace(new PrintWriter(errors));
