@@ -38,7 +38,6 @@ public class WebConfig implements WebMvcConfigurer {
 			.excludePathPatterns("/assets/**");
 	}
 
-
 	//
 	// Application ContextEvent Listener
 	//

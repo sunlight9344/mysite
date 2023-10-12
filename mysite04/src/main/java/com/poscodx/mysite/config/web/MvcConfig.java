@@ -23,7 +23,6 @@ public class MvcConfig implements WebMvcConfigurer {
 		viewResolver.setExposeContextBeansAsAttributes(true);
 		viewResolver.setExposedContextBeanNames("site", "testsite");
 		
-		
 		return viewResolver;
 	}
 	

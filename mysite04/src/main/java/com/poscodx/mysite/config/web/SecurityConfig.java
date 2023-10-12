@@ -28,13 +28,11 @@ public class SecurityConfig implements WebMvcConfigurer {
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
 		resolvers.add(handlerMethodArgumentResolver());
 	}
-
 	
 	@Bean
 	public HandlerMethodArgumentResolver handlerMethodArgumentResolver() {
 		return new AuthUserHandlerMethodArgumentResolver();
 	}
-	
 	
 	/**
 	 * Interceptors

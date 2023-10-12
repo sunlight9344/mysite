@@ -53,7 +53,6 @@ public class WebConfig implements WebMvcConfigurer {
 		return new AuthUserHandlerMethodArgumentResolver();
 	}
 	
-	
 	// Interceptors
 	@Bean
 	public HandlerInterceptor loginInterceptor() {

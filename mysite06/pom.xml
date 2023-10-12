@@ -23,7 +23,6 @@
 	</properties>
 	
 	<dependencies>
-		
 		<!-- Spring Boot Dev Tools: Live Reload -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -94,7 +93,7 @@
 	</dependencies>
 	
 	<build>
-		<finalName>mysite06</finalName>
+		
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -121,6 +120,7 @@
 					<server>poscodx-tomcat</server>
 				</configuration>
 			</plugin>						
-		</plugins>		
+		</plugins>
+		<finalName>mysite06</finalName>		
 	</build>	
 </project>
