@@ -10,31 +10,131 @@
 <title>mysite</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link href="${pageContext.request.contextPath }/assets/css/user.css" rel="stylesheet" type="text/css">
+<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+
+var messageBox = function(title, message, callback) {
+	$("#dialog").attr("title", title);
+	$("#dialog p").text(message);
+	$("#dialog").dialog({
+		width: 340,
+		modal: true,
+		buttons: {
+			"확인": function() {
+				$(this).dialog("close");
+			}
+		},
+		close: callback
+	});
+}
+
+$(function(){
+	
+	$("#join-form").submit(function(event) {
+		event.preventDefault();
+		
+		if($("#name").val() === '') {
+			messageBox('회원가입', '이름 써라', function() {
+				$("#name").focus();
+			});
+			return;	
+		}
+		
+		if($("#email").val() === '') {
+			messageBox('회원가입', '이메일 써라', function() {
+				$("#email").focus();
+			});
+			return;	
+		}
+		
+		if(!$("#img-check-email").is(':visible')) {
+			messageBox('회원가입', '이메일 중복체크 하삼', function() {
+				$("#email").focus();
+			});
+			return;	
+		}
+		
+		if($("#password").val() === '') {
+			messageBox('회원가입', '비번 써라', function() {
+				$("#password").focus();
+			});
+			return;	
+		}
+		
+		this.submit();
+	});
+	
+	$('#email').change(function() {
+		$('#img-check-email').hide();
+		$('#btn-check-email').show();
+	});
+	
+	$('#btn-check-email').click(function() {
+		var email = $('#email').val();
+		if(email === '') {
+			return;
+		}
+
+		$.ajax({
+			url: '${pageContext.request.contextPath }/api/user?email=' + email,
+			type: 'get',
+			dataType: 'json',
+			success: function(response) {
+				if(response.result !== 'success') {
+					console.error(reponse.message);
+					return;
+				}
+				
+				if(response.data) {
+					$("#dialog").dialog({
+						width: 340,
+						modal: true,
+						buttons: {
+							"확인": function() {
+								$(this).dialog("close");
+							}
+						},
+						close: function() {
+							$("#email").val('').focus();
+						}
+					});
+					$("#email").val('').focus();
+					return;
+				}
+				
+				$('#img-check-email').show();
+				$('#btn-check-email').hide();
+			},
+			error: function(xhr, status, e) {
+				console.error(status, e);
+			}
+		});
+	});
+});
+</script>
 </head>
 <body>
 	<div id="container">
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
 			<div id="user">
-
-				<form:form 
-					modelAttribute="userVo"
-					id="join-form" 
-					name="joinForm" 
-					method="post" 
+				<form:form
+					modelAttribute="userVo" 
+					id="join-form"
+					name="joinForm"
+					method="post"
 					action="${pageContext.request.contextPath }/user/join">
 					
 					<label class="block-label" for="name">이름</label>
-					
 					<form:input path="name" />
-					
 					<p style="padding:3px 0 5px 0; text-align: left; color: #f00">
 						<spring:hasBindErrors name="userVo">
 							<c:if test="${errors.hasFieldErrors('name') }">
-							<!-- 
-							얘가 기본
-							${errors.getFieldError("name").defaultMessage }
-							 -->
+								<!--
+								${errors.getFieldError("name").defaultMessage }
+								-->
 								<spring:message code='${errors.getFieldError("name").codes[0]}' />
 							</c:if> 
 						</spring:hasBindErrors>
@@ -42,7 +142,10 @@
 					
 					<label class="block-label" for="email">이메일</label>
 					<form:input path="email" />
-					<input type="button" value="중복체크">
+
+					<input id='btn-check-email' type="button" value="중복체크">
+					<img id='img-check-email' src='${pageContext.request.contextPath }/assets/images/check.png' style='width: 16px; vertical-align: middle; display:none'>
+					
 					<p style="padding:3px 0 5px 0; text-align: left; color: #f00">
 						<form:errors path="email" />
 					</p>
@@ -55,10 +158,8 @@
 					
 					<fieldset>
 						<legend>성별</legend>
-						
+						<form:radiobutton path="gender" value="female" label="여" checked="checked" />
 						<form:radiobutton path="gender" value="male" label="남" checked="checked" />
-						<form:radiobutton path="gender" value="female" label="여" />
-						
 					</fieldset>
 					
 					<fieldset>
@@ -74,6 +175,9 @@
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp" />
 		<c:import url="/WEB-INF/views/includes/footer.jsp" />
+	</div>
+	<div id="dialog" title="이메일 중복 체크">
+  		<p>사용중인 이메일입니다. 다른 이메일을 사용해 주세요.</p>
 	</div>
 </body>
 </html>
