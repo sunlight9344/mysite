@@ -23,4 +23,8 @@ public class GuestbookService {
 	public void addContents(GuestbookVo vo) {
 		guestbookRepository.insert(vo);
 	}
+
+	public List<GuestbookVo> getContentsList(int sno, int k) {
+		return guestbookRepository.findTop(sno, k);
+	}
 }

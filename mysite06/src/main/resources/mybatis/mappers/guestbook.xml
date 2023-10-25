@@ -8,6 +8,12 @@
 		select no, name, password, contents, reg_date from guestbook order by reg_date desc
 	]]>
 	</select>
+
+	<select id="findTop" parameterType="map" resultType="guestbookvo">
+	<![CDATA[
+		select no, name, password, contents, reg_date from guestbook order by reg_date desc limit #{sno},#{k}
+	]]>
+	</select>
 		
 	<insert id="insert" parameterType="guestbookvo">
 	<![CDATA[
