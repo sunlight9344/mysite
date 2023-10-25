@@ -27,4 +27,12 @@ public class GuestbookService {
 	public List<GuestbookVo> getContentsList(int sno, int k) {
 		return guestbookRepository.findTop(sno, k);
 	}
+
+	public GuestbookVo findByNo(int no) {
+		return guestbookRepository.findByNo(no);
+	}
+
+	public int getLastIndex() {
+		return guestbookRepository.getLastIndex();
+	}
 }

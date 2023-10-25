@@ -39,4 +39,12 @@ public class GuestbookRepository {
 		map.put("k", k);
 		return sqlSession.selectList("guestbook.findTop", map);
 	}
+
+	public GuestbookVo findByNo(int no) {
+		return sqlSession.selectOne("guestbook.findByNo", no);
+	}
+
+	public int getLastIndex() {
+		return sqlSession.selectOne("guestbook.getLastIndex");
+	}
 }

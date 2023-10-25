@@ -9,6 +9,18 @@
 	]]>
 	</select>
 
+	<select id="findByNo" resultType="guestbookvo" parameterType="int">
+	<![CDATA[
+		select no, name, password, contents, reg_date from guestbook where no=#{no }
+	]]>
+	</select>
+
+	<select id="getLastIndex" resultType="int">
+	<![CDATA[
+		select last_insert_id()
+	]]>
+	</select>
+
 	<select id="findTop" parameterType="map" resultType="guestbookvo">
 	<![CDATA[
 		select no, name, password, contents, reg_date from guestbook order by reg_date desc limit #{sno},#{k}
