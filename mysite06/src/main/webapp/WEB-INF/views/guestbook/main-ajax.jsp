@@ -48,6 +48,8 @@ $(function() {
 							var er = document.querySelector('#list-guestbook li[data-no="'+no+'"]');
 							er.remove();
 							$('#validateTips-error').hide();
+							dialogDelete.dialog('close');
+							console.log($(this));
 						}else {
 							// input data 삭제하고 비번 틀렸다 하기
 							$('#password-delete').val('');
@@ -59,7 +61,6 @@ $(function() {
 				//1. response.data 가지고 있는 <li data+no='{no}' > 찾아서 삭제
 				
 				//2. dialogDelete.dialog('close');
-				//$(this).dialog('close');
 				
 				//3. 폼의 input reset 해주기
 				
