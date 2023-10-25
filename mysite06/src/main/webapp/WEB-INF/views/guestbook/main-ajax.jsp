@@ -58,6 +58,7 @@ $(function() {
 		var st = $window.scrollTop();
 		
 		if(dh < wh + st + 10) {
+			flag = true;
 			fetch(sno);
 		}
 	})
@@ -75,7 +76,6 @@ var render = function(vo, mode) {
 }
 
 var fetch = function() {
-	
 	console.log(sno);
 	$.ajax({
 		url: "${pageContext.request.contextPath }/api/guestbook/"+sno,
@@ -87,6 +87,8 @@ var fetch = function() {
 				return;
 			}
 			
+			console.log(response.data);
+			
 			if(!response.data.length){
 				sno = -1;
 				return;
@@ -95,9 +97,9 @@ var fetch = function() {
 			response.data.forEach(function(vo) {
 				render(vo, false);
 			});
-			sno += 5;
 		}
 	})
+	sno += 5;
 	flag = false;
 }
 </script>
