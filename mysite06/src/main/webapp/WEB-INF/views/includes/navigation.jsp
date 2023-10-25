@@ -9,6 +9,7 @@
 	<ul>
 		<li><a href="${pageContext.request.contextPath }">전예준</a></li>
 		<li><a href="${pageContext.request.contextPath }/guestbook">방명록</a></li>
+		<li><a href="${pageContext.request.contextPath }/guestbook/ajax">방명록(아쟉스)</a></li>
 		<li><a href="${pageContext.request.contextPath }/board">게시판</a></li>
 		<li><a href="${pageContext.request.contextPath }/gallery">갤러리</a></li>
 	</ul>
