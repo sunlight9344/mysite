@@ -29,7 +29,7 @@ $(function() {
 				
 				var no =$('#hidden-no').val();
 				var password = $('#password-delete').val();
-				console.log("ajax 삭제하는 걸 여기서 ...");
+				//console.log("ajax 삭제하는 걸 여기서 ...");
 				
 				$.ajax({
 					url: '${pageContext.request.contextPath }/api/guestbook/' + no,
@@ -43,33 +43,30 @@ $(function() {
 							return;
 						}
 						
-						console.log(response, password);
-						
 						if(response.data.password === password) {
 							// 삭제
 							var er = document.querySelector('#list-guestbook li[data-no="'+no+'"]');
 							er.remove();
+							$('#validateTips-error').hide();
 						}else {
 							// input data 삭제하고 비번 틀렸다 하기
-							
+							$('#password-delete').val('');
+							$('#validateTips-error').show();
 						}
 					}
 				})
-				
-				//console.log(no, password);
-				
 				// 후처리
 				//1. response.data 가지고 있는 <li data+no='{no}' > 찾아서 삭제
 				
-				
 				//2. dialogDelete.dialog('close');
-				$(this).dialog('close');
+				//$(this).dialog('close');
 				
 				//3. 폼의 input reset 해주기
 				
 			},
 			"취소": function() {
 				$(this).dialog('close');
+				$('#validateTips-error').hide();
 			}
 		},
 		close: function() {
@@ -202,7 +199,7 @@ var fetch = function() {
 			</div>
 			<div id="dialog-delete-form" title="메세지 삭제" style="display:none">
   				<p class="validateTips normal">작성시 입력했던 비밀번호를 입력하세요.</p>
-  				<p class="validateTips error" style="display:none">비밀번호가 틀립니다.</p>
+  				<p id="validateTips-error" style="display:none; color:red">비밀번호가 틀립니다.</p>
   				<form>
  					<input type="password" id="password-delete" value="" class="text ui-widget-content ui-corner-all">
 					<input type="hidden" id="hidden-no" value="">
