@@ -48,6 +48,7 @@ public class GlobalExceptionHandler {
 					.getRequestDispatcher("/WEB-INF/views/error/404.jsp")
 					.forward(request, response);
 			}
+			return;
 		}
 		
 		//2. 로깅(Logging)
@@ -55,28 +56,23 @@ public class GlobalExceptionHandler {
 		e.printStackTrace(new PrintWriter(errors));
 		logger.error(errors.toString());
 		
-		if(e instanceof NoHandlerFoundException) {
-			if(accept.matches(".*application/json.*")) {
-				JsonResult jsonResult = JsonResult.fail(errors.toString());
-				String jsonString = new ObjectMapper().writeValueAsString(jsonResult);
-				
-				response.setStatus(HttpServletResponse.SC_OK);
-				response.setContentType("application/json; charset=utf-8");
-				
-				OutputStream os = response.getOutputStream();
-				os.write(jsonString.getBytes("utf-8"));
-				
-			} else {
-				request.setAttribute("errors", errors.toString());
-				
-				request
-					.getRequestDispatcher("/WEB-INF/views/error/exception.jsp")
-					.forward(request, response);
-			}
+		
+		if(accept.matches(".*applicationjson.*")) {
+			JsonResult jsonResult = JsonResult.fail(errors.toString());
+			String jsonString = new ObjectMapper().writeValueAsString(jsonResult);
+			
+			response.setStatus(HttpServletResponse.SC_OK);
+			response.setContentType("application/json; charset=utf-8");
+			
+			OutputStream os = response.getOutputStream();
+			os.write(jsonString.getBytes("utf-8"));
+			
+		} else {
+			request.setAttribute("errors", errors.toString());
+			
+			request
+				.getRequestDispatcher("/WEB-INF/views/error/exception.jsp")
+				.forward(request, response);
 		}
-//		
-//		//3. apple 페이지
-//		model.addAttribute("errors", errors.toString());
-//		return "error/exception";
 	}
 }
