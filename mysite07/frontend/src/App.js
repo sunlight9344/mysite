@@ -11,11 +11,11 @@ import Settings from './component/user/Settings';
 
 export default function App() {
     return useRoutes([
-        { path:'gallery', element: <Gallery /> },
-        { path:'guestbook', element: <Guestbook /> },
-        { path:'user/login', element: <SignIn /> },
-        { path:'user/join', element: <SignUp /> },
-        { path:'user/settings', element: <Settings /> },
+        { path:'/gallery', element: <Gallery /> },
+        { path:'/guestbook', element: <Guestbook /> },
+        { path:'/user/login', element: <SignIn /> },
+        { path:'/user/join', element: <SignUp /> },
+        { path:'/user/settings', element: <Settings /> },
         { path:'*', element: <Main /> }
     ]);
 }
