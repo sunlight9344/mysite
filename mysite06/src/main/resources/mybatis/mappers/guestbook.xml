@@ -31,6 +31,10 @@
 	<![CDATA[
 		insert into guestbook values(null, #{name }, #{password }, #{contents }, now())
 	]]>
+
+	<selectKey keyProperty="no" resultType="Integer" order="AFTER">
+        SELECT LAST_INSERT_ID()
+    </selectKey>	
 	</insert>
 	
 	

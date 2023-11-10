@@ -46,6 +46,10 @@ $(function() {
 						if(response.data.password === password) {
 							// 삭제
 							var er = document.querySelector('#list-guestbook li[data-no="'+no+'"]');
+							
+							//이거 외안뒘?
+							//var er = document.querySelector(`#list-guestbook li[data-no=${no}]`);
+							
 							er.remove();
 							$('#validateTips-error').hide();
 							dialogDelete.dialog('close');

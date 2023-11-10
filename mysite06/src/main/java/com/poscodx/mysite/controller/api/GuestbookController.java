@@ -28,8 +28,8 @@ public class GuestbookController {
 	@Transactional
 	public JsonResult create(@RequestBody GuestbookVo vo) {
 	    guestbookService.addContents(vo);
-	    int no = guestbookService.getLastIndex();
-	    vo.setNo(no);
+//	    int no = guestbookService.getLastIndex();
+//	    vo.setNo(no);
 		return JsonResult.success(vo);
 	}
 	
@@ -49,8 +49,6 @@ public class GuestbookController {
 			) {
 		
 		GuestbookVo vo = guestbookService.findByNo(no);
-		
-		System.out.println("------------->" + vo);
 		guestbookService.deleteContents(no, password);
 		return JsonResult.success(vo);
 	}
