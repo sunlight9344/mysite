@@ -41,11 +41,9 @@ export default function Index() {
 
 
     return (
-        <MySiteLayout>
-            <div className={styles.Gallery}>
-                <Header addImage={addImage}/>
-                <ImageList imageList={imageList} />
-            </div>
-        </MySiteLayout>
+        <div className={styles.Gallery}>
+            <Header addImage={addImage}/>
+            <ImageList imageList={imageList} />
+        </div>
     )
 }

@@ -2,6 +2,7 @@ package com.poscodx.mysite.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.poscodx.mysite.repository.GuestbookRepository;
@@ -9,6 +10,8 @@ import com.poscodx.mysite.vo.GuestbookVo;
 
 @Service
 public class GuestbookService {
+	
+	@Autowired
 	final GuestbookRepository guestbookRepository;
 
 	public GuestbookService(GuestbookRepository guestbookRepository) {

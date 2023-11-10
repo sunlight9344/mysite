@@ -1,5 +1,6 @@
 package com.poscodx.mysite.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,6 +19,8 @@ import com.poscodx.mysite.vo.GuestbookVo;
 @RestController
 @RequestMapping("/api/guestbook")
 public class GuestbookController {
+	
+	@Autowired
 	private final GuestbookService guestbookService;
 
 	public GuestbookController(GuestbookService guestbookService) {
@@ -32,7 +35,8 @@ public class GuestbookController {
 	@PostMapping("")
 	public ResponseEntity<JsonResult> add(@RequestBody GuestbookVo vo) {
 		guestbookService.addContents(vo);
-		vo.setPassword("");		
+		vo.setPassword("");
+		System.out.println(vo);
 		return ResponseEntity.status(HttpStatus.OK).body(JsonResult.success(vo));
 	}
 

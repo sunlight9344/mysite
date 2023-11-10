@@ -6,7 +6,7 @@
 		  select no,
 		         name,
 		         contents,
-		         date_format(reg_date, '%Y-%m-%d') as regDate
+		         date_format(reg_date, '%Y-%m-%d %H:%i:%S') as regDate
 		    from guestbook
 		]]>
 		<if test="_parameter > 0">
@@ -16,7 +16,6 @@
 		</if>
 		<![CDATA[
 	  	order by no desc
-	  	limit 0, 3
 	  	]]>
 	</select>
 	

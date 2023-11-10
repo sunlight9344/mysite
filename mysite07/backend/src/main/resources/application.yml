@@ -26,7 +26,6 @@ spring:
          max-request-size: 100MB
 mybatis:
    config-location: classpath:mybatis/configuration.xml
-
          
 ---
 # development configuration
@@ -42,7 +41,7 @@ spring:
          static-locations: classpath:/assets/, file:/mysite-uploads/
    datasource:
       driver-class-name: org.mariadb.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/webdb?characterEncoding=utf8
+      url: jdbc:mariadb://192.168.0.180:3307/webdb?charset=utf8
       username: webdb
       password: webdb   
 server:
@@ -58,7 +57,6 @@ logging:
    level:
       root: INFO         
 
-
 ---
 #
 # production profile configuration
@@ -72,7 +70,7 @@ spring:
          static-locations: classpath:/assets/, file:/mysite-uploads/         
    datasource:
       driver-class-name: org.mariadb.jdbc.Driver
-      url: jdbc:mariadb://192.168.0.172:3306/webdb?characterEncoding=utf8
+      url: jdbc:mariadb://192.168.0.180:3307/webdb?charset=utf8
       username: webdb
       password: webdb   
 server:
@@ -95,6 +93,6 @@ logging:
    level:
       root: WARN
       me:
-         kickscar:
+         sunlight:
             mysite:
                exception: ERROR
