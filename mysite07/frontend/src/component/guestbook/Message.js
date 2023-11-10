@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../../assets/scss/component/guestbook/Message.scss';
 
 
-function Message({no, name, regDate, contents, deleteMessage}) {
+function Message({no, name, regDate, contents, openModal}) {
 
     return (
         <div className={styles.Message}>
@@ -11,7 +11,7 @@ function Message({no, name, regDate, contents, deleteMessage}) {
                 <span>{contents}</span>
                 <span>{regDate}</span>
             </p>
-            <a href='#' onClick={() => {deleteMessage()}}/>
+            <a href='#' onClick={(e) => {openModal(e)}}/>
         </div>
     );
 }

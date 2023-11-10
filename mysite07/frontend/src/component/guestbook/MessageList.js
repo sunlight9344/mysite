@@ -7,17 +7,19 @@ import modalStyles from '../../assets/scss/component/modal/modal.scss';
 
 function MessageList({messages}) {
 
-    const [modalData, setModalData] = useState({isOpen:false});
+    const [modalData, setModalData] = useState({isOpen:false, password:''});
     const refForm = useRef(null);
 
-    const handleSubmit = ((e)=>{
+    const openModal = (e) => {
         e.preventDefault();
-    });
-
-    const deleteMessage = async (messageNo, password) => {
-
         setModalData({isOpen:true});
+    };
 
+    const deleteMessage = async (e) => {
+        e.preventDefault();
+        console.log(e.target.password.value);
+        setModalData({isOpen:true});
+        
         // console.log(messageNo);
         // try{
         //     const response = await fetch(`/api/guestbook/${messageNo}`, {
@@ -49,7 +51,7 @@ function MessageList({messages}) {
     return (
         <ul className={styles.MessageList}>
             {
-                messages.map(e => <Message key={e.no} no={e.no} name={e.name} regDate={e.regDate} contents={e.contents} deleteMessage={deleteMessage} />)
+                messages.map(e => <Message key={e.no} no={e.no} name={e.name} regDate={e.regDate} contents={e.contents} openModal={openModal} />)
             }
             <Modal
                 isOpen={modalData.isOpen}
@@ -57,11 +59,12 @@ function MessageList({messages}) {
                 shouldCloseOnOverlayClick={true}
                 className={modalStyles.Modal}
                 overlayClassName={modalStyles.Overlay}
-                style={{content: {width:200}}}>
+                style={{content: {width:200}}}
+                >
                 <h1>비밀번호입력</h1>
                 <div>
                     <form
-                        onSubmit={handleSubmit}
+                        onSubmit={deleteMessage}
                         className={styles.DeleteForm}
                         ref={refForm}>
                         <label>{modalData.isOpen || ''}</label>
@@ -70,15 +73,19 @@ function MessageList({messages}) {
                             autoComplete={'off'}
                             name={'password'}
                             placeholder={'비밀번호'}
-                            // value={modalData.password || ''}
-                            onChange={(e) => {}}
+                            value={modalData.password}
                         />
+                        <div className={modalStyles['modal-dialog-buttons']}>
+                            <button type='submit'>
+                                확인
+                            </button>
+                            <button
+                                type='button'
+                                onClick={()=>{setModalData({isOpen:false})}}>
+                                취소
+                            </button>
+                        </div>
                     </form>
-                </div>
-                <div className={modalStyles['modal-dialog-buttons']}>
-                    <button onClick={() => {}}>확인
-                    </button>
-                    <button onClick={() => {}}>취소</button>
                 </div>
             </Modal>
         </ul>
