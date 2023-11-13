@@ -11,7 +11,7 @@ function Message({no, name, regDate, contents, openModal}) {
                 <span>{contents}</span>
                 <span>{regDate}</span>
             </p>
-            <a href='#' onClick={(e) => {openModal(e)}}/>
+            <a href='#' onClick={(e) => {openModal(e, no)}}/>
         </div>
     );
 }

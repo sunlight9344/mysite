@@ -71,7 +71,7 @@ function Guestbook() {
         <div className={styles.Guestbook}>
             <h2>방명록이요</h2>
             <WriteForm addMessage={addMessage} />
-            { messages ? <MessageList messages={messages} /> : null }
+            { messages ? <MessageList messages={messages} setMessages={setMessages}/> : null }
         </div>
     );
 }
